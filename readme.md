@@ -25,6 +25,7 @@ Le projet prévoit des évolutions, notamment :
 - utilisation de flatpickr pour la prise de rendez-vous.
 - POO et MVC
 - PHP, JS et SCSS
+- MODIFFF
 
 ## Ameliorations : 
 
