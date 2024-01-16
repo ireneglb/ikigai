@@ -1,0 +1,77 @@
+<?php include_once('Views/admin/index.phtml');?>
+
+<h1>Gestion de la Page Massage</h1>
+
+<?php if (!empty($_SESSION['messageSent'])): ?>
+    <p><?= htmlspecialchars($_SESSION['messageSent'], ENT_QUOTES) ?></p>
+    <?php unset($_SESSION['messageSent']); ?>
+<?php endif; ?>
+
+<?php if (!empty($_SESSIOON['error'])): ?>
+    <p><?= htmlspecialchars($_SESSION['error'], ENT_QUOTES) ?></p>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
+<button id="showAddMassage">Ajouter un massage</button>
+
+<form id="massageForm" action="index.php?route=submitMassage" method="POST">
+    <input 
+        type="hidden" 
+        name="csrf_token_massage" 
+        value="<?= htmlspecialchars($_SESSION['csrf_token_massage'], ENT_QUOTES) ?>"
+    />
+
+    <label for="name">Nom du massage:</label>
+    <input 
+        type="text" 
+        id="name" 
+        name="massage_name" 
+        minlength="5"
+        required><br>
+
+    <label for="type">Type de massage:</label>
+    <input 
+        type="text" 
+        id="type" 
+        name="massage_type" 
+        minlength="5"
+        required><br>
+
+    <label for="description">Description:</label>
+    <textarea 
+        id="description" 
+        name="massage_info" 
+        minlength="10"
+        required></textarea><br>
+
+    <label for="price">Prix</label>
+    <input 
+        type="number" 
+        id="price" 
+        name="massage_price" 
+        title="Veuillez entrer uniquement des chiffres." 
+        required
+    />
+
+    <button type="submit" title="Valider le massage">Valider</button>
+</form>
+
+<div class="cards">
+    <?php foreach($massages as $massage): ?>
+    <div class="card">
+        <div class="product-info">
+            <div class="product-name"><?= htmlspecialchars($massage['name']) ?></div>
+            <div class="product-type"><?= htmlspecialchars($massage['type']) ?></div>
+            <div class="product-description"><?= htmlspecialchars($massage['description']) ?></div>
+            <div class="product-price">Prix (30minutes): <?= htmlspecialchars($massage['price30']) ?></div>
+            <div class="product-price">Prix (60minutes): <?= htmlspecialchars($massage['price60']) ?></div>
+            <div class="product-price">Prix (90minutes): <?= htmlspecialchars($massage['price90']) ?></div>
+            <div class="product-created">Créé le: <?= htmlspecialchars($massage['created_at']) ?></div>
+            <div class="product-modified">Modifié le: <?= htmlspecialchars($massage['modified_at']) ?></div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<script type="module" src="public/js/adminMassage.js"></script>
+

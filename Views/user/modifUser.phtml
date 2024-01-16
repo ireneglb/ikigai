@@ -1,0 +1,58 @@
+<?php include_once('Views/user/index.phtml');?>
+
+<div class="my-account">
+<article>
+    <h2>Modifier le compte</h2>
+
+    <form id='modifyForm' class="form" action="index.php?route=user_modification" method="POST">
+        <input type="hidden" name="csrf_token_modif" value="<?=htmlspecialchars($_SESSION['csrf_token_modif'], ENT_QUOTES)?>">
+        <input 
+            type="hidden" 
+            name="id" 
+            value="<?= htmlspecialchars($_SESSION['connectedUser']['id'], ENT_QUOTES) ?>"
+        />
+        
+        <label for="user_lastname">Nom </label>
+        <input 
+            type="text" 
+            id="user_lastname"
+            name="user_lastname" 
+            value="<?= htmlspecialchars($_SESSION['connectedUser']['lastname'], ENT_QUOTES) ?>"
+            readonly
+        />
+
+        <label for="user_firstname">Prénom </label>
+        <input 
+            type="text" 
+            id="user_firstname" 
+            name="user_firstname" 
+            value="<?= htmlspecialchars($_SESSION['connectedUser']['firstname'], ENT_QUOTES) ?>"
+            readonly
+        />
+    
+        <label for="user_mail">Email </label>
+        <input 
+            type="email" 
+            id="user_mail" 
+            name="user_mail" 
+            value="<?= htmlspecialchars($_SESSION['connectedUser']['email'], ENT_QUOTES) ?>"
+            readonly
+        />
+    
+        <label for="user_number">Téléphone </label>
+        <input 
+            type="tel" 
+            id="user_number" 
+            name="user_number" 
+            value="<?= htmlspecialchars($_SESSION['connectedUser']['phone'], ENT_QUOTES) ?>"
+            readonly
+        />
+
+        <button type="button" id="editButton" class="modify" title="Bouton pour modifier">Modifier</button>
+        <button type="submit" id="submitButton" class="validate" title="Bouton pour valider la modification" disabled>Valider</button> 
+    </form>
+</article>
+<article>
+    <?php include_once 'delete.phtml'; ?>
+</article>
+</div>

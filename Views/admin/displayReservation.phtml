@@ -1,0 +1,31 @@
+<?php include_once('Views/admin/index.phtml');?>
+
+<h2>Affichage des reservations de massage</h2>
+<div class="card-massage">
+    <p>Il y a actuellement <?=htmlspecialchars($reservations ,ENT_QUOTES)  ?> massage de réservé.</p>
+</div>    
+<div>
+<?php foreach ($userMassageDetails as $reservationDetails) : ?>
+    <div class="list card-massage">
+        <p>Nom de l'utilisateur : <?=htmlspecialchars($reservationDetails['user_firstname'] . ' ' . $reservationDetails['user_lastname'], ENT_QUOTES); ?></p>
+        <p>Nom du massage : <?=htmlspecialchars($reservationDetails['massage_name'], ENT_QUOTES); ?></p>
+        <p>Type de massage : <?=htmlspecialchars($reservationDetails['massage_type'], ENT_QUOTES); ?></p>
+        <?php
+            $duration = $reservationDetails['duration'];
+            $price = ($duration == '00:30:00') ? $reservationDetails['massage_price30'] :
+                    (($duration == '01:00:00') ? $reservationDetails['massage_price60'] :
+                    (($duration == '01:30:00') ? $reservationDetails['massage_price90'] : 0));
+        ?>
+        <p>Prix du massage : <?= htmlspecialchars($price, ENT_QUOTES); ?> €</p>
+        <p>Date et heure de la réservation : <?=htmlspecialchars($reservationDetails['datetime_start'], ENT_QUOTES); ?></p>
+        <p> Durée de la réservation : <?=htmlspecialchars($reservationDetails['duration'], ENT_QUOTES); ?> </p>
+        <p>Offre : 
+            <?php if ($reservationDetails['offer'] == 1): ?>
+                Oui
+            <?php else: ?>
+                Non
+            <?php endif; ?> 
+        </p>
+    </div>
+<?php endforeach; ?>
+</div>

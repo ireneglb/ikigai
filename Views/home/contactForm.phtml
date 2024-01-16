@@ -1,0 +1,72 @@
+<form id ="contactForm" class="form" action="index.php?route=submit_message" method="POST">
+    
+    <input 
+        type="hidden" 
+        name="csrf_token_formMessage" 
+        value="<?= htmlspecialchars($_SESSION['contact_form_csrf_token'],ENT_QUOTES) ?>"
+    />
+    <fieldset>
+        <label for="msg_lastname">Nom</label>
+        <input 
+            type="text" 
+            id="msg_lastname" 
+            name="user_lastname"
+            minlength="2"
+            title="Entrez votre Nom(2 caractères minimum)"
+            <?php if(!empty($_SESSION['formErrors']['user_lastname'])): ?>class="error"<?php endif; ?>
+        />
+
+        <label for="msg_firstname">Prénom</label>
+        <input 
+            type="text" 
+            id="msg_firstname" 
+            name="user_firstname"
+            minlength="2" 
+            title="Entrez votre Prénom (2 caractères minimum)"
+        />
+    </fieldset>
+    <fieldset>
+        <label for="msg_number">Numéro de téléphone</label>
+        <input 
+            type="tel" 
+            id="msg_number" 
+            name="user_number" 
+            title = "Entrez votre numéro de téléphone. 10 à 12 chiffres."
+        />
+
+        <label for="msg_email">Email</label>
+        <input 
+            type="email" 
+            id="msg_email" 
+            name="user_mail" 
+            title="Entrez votre email"
+            placeholder="   @   .com"
+        />
+    </fieldset>
+    <fieldset class="msg">
+        <label for="msg">Message</label>
+        <textarea 
+            id="msg" 
+            name="user_text" 
+            title = "Entrez votre message"
+            placeholder="Tapez votre message..." 
+        ></textarea>
+    </fieldset>
+
+    <div id="errorContact"></div>
+    <button type="submit" id="btnSubmit"title="Bouton pour valider l'incription">Envoyer</button>
+</form>
+
+<?php 
+if (!empty($_SESSION['formErrors'])): ?>
+    <?php foreach ($_SESSION['formErrors'] as $error): ?>
+        <div class='error'>
+            <?= htmlspecialchars($error); ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+
+
+

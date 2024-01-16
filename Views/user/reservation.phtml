@@ -1,0 +1,66 @@
+<?php include_once('Views/user/index.phtml');?>
+
+<h2>Réservation de massage</h2>
+
+<form id="reservationForm" class ="form-reserv" action="index.php?route=submitReservation" method="POST"> 
+    
+    <input type="hidden" name="csrf_token_reservation" value="<?= $_SESSION['csrf_token_reservation'] ?>"/>
+    
+    <fieldset>
+        <label>Disponibilités </label>
+        <div id="calendar"></div>
+    </fieldset>
+
+    <fieldset>
+        <label for="types_massage">Choix du massage </label>
+        <select id="types_massage" name="types_massage" class="centered-select" required>
+            <option value="">Sélectionnez un type de massage</option>
+            <?php 
+                $groupedMassages = [];
+                foreach ($displayMassages as $massage) {
+                    $groupedMassages[$massage['type']][] = $massage;
+                }
+                    foreach ($groupedMassages as $type => $massagesOfType): ?>
+                        <optgroup label="Massages <?= htmlspecialchars(ucfirst($type)) ?>">
+                            <?php foreach ($massagesOfType as $massage): ?>
+                                <option value="<?= htmlspecialchars($massage['id']) ?>"><?= htmlspecialchars($massage['name']) ?></option>
+                            <?php endforeach; ?>
+                        </optgroup>
+                <?php endforeach; ?>
+        </select>   
+    
+        <label for="duree_massage">Durée</label>
+        <select class="centered-select" id="duree_massage" name="duration" required>
+        <option value="">Sélectionnez une durée</option>
+            <option value="00:30:00">30 minutes</option>
+            <option value="01:00:00">1 heure</option>
+            <option value="01:30:00">1 heure et 30 minutes</option>
+        </select>
+    
+        <label for="offre_speciale">Offre spéciale (massage + boisson + pâtisserie) </label>
+        <select class="centered-select" id="offre_speciale" name="special_offer">
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <div id="prixSection" class="hidden">                     
+            <label></label>
+            <input type="hidden" name="tarif" id="tarif" value=""/>
+            <input type="hidden" name="duree_tarif" id="duree_tarif" value=""/>
+            <span id="prix"></span>
+        </div>
+        <label for="flatpickr">Selection date et heure</label>
+        <input class="centered-select" type="text" id="flatpickr" name="select_date" placeholder="2023-11-20 11:00" required/>
+    </fieldset>
+    <button 
+            type="submit" 
+            id="validateReserv"
+            title="Bouton pour valider la reservation">Valider
+    </button>
+     
+</form> 
+
+<script type="module" src="public/js/userMassage.js"></script>
+
+    

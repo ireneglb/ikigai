@@ -1,0 +1,24 @@
+<h2>Supprimer le compte</h2>
+
+<form id="deleteForm" action="index.php?route=user_delete" method="POST">
+    <input 
+        type="hidden" 
+        name="csrf_token_delete" 
+        value="<?=htmlspecialchars($_SESSION['csrf_token_delete'], ENT_QUOTES)?>"
+    />
+    <input 
+        name="id" 
+        type="hidden" 
+        value="<?=htmlspecialchars($_SESSION['connectedUser']['id'],ENT_QUOTES) ; ?>"
+    />
+    <input 
+        type="submit"
+        id="btnDelete" 
+        class ="delete"
+        title="Supprimer le compte"
+        value="Supprimer le compte"
+    />
+</form>
+
+<script type="module" src="public/js/userActions"></script>
+

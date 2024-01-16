@@ -1,0 +1,20 @@
+<section>
+    <h1>Présentation des massages</h1>
+
+    <?php foreach ($groupedMassages as $type => $massages): ?>
+    <article class=type-massage>
+        <h2><?= htmlspecialchars($type) ?></h2>
+        <div class="massage-container">    
+            <?php foreach ($massages as $massage): ?>
+                <div class="massage">
+                    <p>Le <?= htmlspecialchars($massage['name']) ?></p>
+                    <p><?= htmlspecialchars($massage['description']) ?></p>
+                    <p>30 minutes: <?= htmlspecialchars($massage['price30']) ?>€</p>
+                    <p>1 heure: <?= htmlspecialchars($massage['price60']) ?>€</p>
+                    <p>1 heure et 30 minutes: <?= htmlspecialchars($massage['price90']) ?>€</p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </article>
+    <?php endforeach; ?>
+</section>

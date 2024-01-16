@@ -1,0 +1,60 @@
+<h3>Se connecter</h3>
+<form action="index.php?route=login" id="login_form" method="POST" class="connexion-form" >
+    
+    <input 
+        type="hidden" 
+        name="csrf_token_login" 
+        value="<?= htmlspecialchars($_SESSION['csrf_token_login'], ENT_QUOTES) ?>"
+    />
+    <fieldset>
+    <label for="login_email">Email</label>
+    <input 
+        type="email" 
+        name="user_mail" 
+        id="login_email" 
+        placeholder="   @   .com"
+        title="Entrez votre email"
+        required
+    />
+    </fieldset>
+    <fieldset>
+        <label for="login_password">Mot de passe</label>
+        <div class="password-verif">
+            <input 
+                type="password" 
+                name="user_password" 
+                id="login_password" 
+                placeholder=" 8 caractères minimum "
+                title="Doit contenir au moins un chiffre, un caractère spécial (&@!?;()), et au moins 8 caractères ou plus"
+                required
+            />
+            <button 
+                type="button" 
+                id="btnShowPasswordLogin"
+                title="Afficher le mot de passe"
+                class="btnShowPassword">
+                <svg id="eyeBis" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye-off"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg> 
+            </button> 
+        </div>
+    </fieldset>
+
+    <div id=errorsLogin></div>
+    <button 
+        type="submit" 
+        id="btnLogin"
+        class="btnSubmitAuth"
+        title="Bouton pour se connecter">Se connecter
+    </button>
+</form>
+
+<?php 
+if (!empty($_SESSION['formErrors'])): ?>
+    <?php foreach ($_SESSION['formErrors'] as $error): ?>
+        <div class='error'>
+            <?= htmlspecialchars($error); ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+

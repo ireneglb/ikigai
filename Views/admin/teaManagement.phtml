@@ -1,0 +1,86 @@
+<?php include_once('Views/admin/index.phtml');?>
+
+<h1>Gestion du Salon de thé</h1>
+
+<button id="showAddProduct">Ajouter un produit</button>
+
+<form id="productForm" action="index.php?route=submitProduct" method="POST" enctype="multipart/form-data">
+    
+    <input 
+        type="hidden" 
+        name="csrf_token_product" 
+        value="<?= htmlspecialchars($_SESSION['csrf_token_product'], ENT_QUOTES) ?>"
+    />
+
+    <label for="name">Nom du produit:</label>
+    <input 
+        type="text" 
+        id="name" 
+        name="product_name"
+        required
+    />
+
+    <label for="image">Choisissez une image (format jpg, jpeg, png, gif)</label>
+    <input 
+        type="file" 
+        id="image" 
+        name="upload_image" 
+        required
+    />
+
+    <label for="description">Description:</label>
+    <textarea 
+        id="description" 
+        name="product_info" 
+        minlength="10"
+        required
+    >
+    </textarea>
+
+    <label for="product_price">Prix</label>
+    <input 
+        type="number" 
+        id="product_price" 
+        name="product_price" 
+        title="Veuillez entrer uniquement des chiffres." 
+        placeholder="Prix en euros"
+        required
+    />
+
+    <input 
+        type="submit" 
+        title="Validez"
+        value="Validez l'enregistrement"
+    />
+</form>
+
+<?php if (!empty($_SESSION['messageSent'])): ?>
+    <div class='message'>
+        <?= htmlspecialchars($_SESSION['messageSent']); ?>
+        <?php unset($_SESSION['messageSent']); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (!empty($_SESSION['formErrors'])): ?>
+    <?php foreach ($_SESSION['formErrors'] as $error): ?>
+        <div class='error'>
+            <?= htmlspecialchars($error); ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<div class="cards-product">
+<?php foreach ($products as $product): ?>
+    <div class="card-product">
+        <p>Nom <?= htmlspecialchars($product['name']) ?></p>
+        <p>Description <?= htmlspecialchars($product['description']) ?></p>
+        <p><img class="product-image" src="public/upload/<?= htmlspecialchars($product['image']) ?>" alt="Image du produit"></p>
+        <p>Prix <?= htmlspecialchars($product['price']) ?></p>
+        <p>Création <?= htmlspecialchars($product['created_at']) ?></p>
+        <p>Modification <?= htmlspecialchars($product['updated_at']) ?></p>
+    </div>
+<?php endforeach; ?>
+</div>
+
+<script type="module" src="public/js/adminProduct.js"></script>
+

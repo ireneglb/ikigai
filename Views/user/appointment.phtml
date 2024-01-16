@@ -1,0 +1,44 @@
+<?php include_once('Views/user/index.phtml');?>
+
+<h1>Mes rendez-vous à venir</h1>
+
+<?php if(!empty($message)): ?>
+    <p><?= htmlspecialchars($message, ENT_QUOTES) ?></p>
+<?php endif; ?>
+
+<?php if(!empty($userReservations)): ?>
+    <table class="read-massage">
+        <tr>
+            <th>Nom du massage</th>
+            <th>Durée</th>
+            <th>Date</th>
+            <th>Annuler</th>
+        </tr>
+        <?php foreach($userReservations as $reservation): ?>
+        <tr>
+            <td><?= htmlspecialchars($reservation['massage_name']) ?></td>
+            <td><?= htmlspecialchars($reservation['duration']) ?></td>
+            <td><?= htmlspecialchars($reservation['created_at']) ?></td>
+            <td>
+               <form method="POST" action="index?route=submitDelete index.php?route=submitReservation" id="deletReserv">
+               <input type="hidden" name="csrf_token_delete_reserv" value="<?=htmlspecialchars($_SESSION['csrf_token_delete_reserv'], ENT_QUOTES)?>">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="<?=htmlspecialchars($reservation['reservation_id'],ENT_QUOTES) ?>"> <!-- Utilisez l'ID de la réservation ici -->
+                <button type="submit" class="bin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b93131" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                </button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+
+<script type="module" src="public/js/deleteReservation.js"></script>
+
+            

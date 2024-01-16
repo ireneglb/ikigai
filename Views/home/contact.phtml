@@ -1,0 +1,48 @@
+<section class="info-container">
+    <h1>Informations</h1>
+    <div id="hidden-map">
+        <iframe
+            class="map" 
+            width="425" 
+            height="350" 
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-0.5744916200637818%2C44.83643920045825%2C-0.5706828832626344%2C44.83781243866995&amp;layer=mapnik"> 
+        </iframe>
+    </div>
+    <div class="info-details">
+        <article> 
+            <a href="https://www.openstreetmap.org/node/2485582444">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#cc6c8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </a>
+            <h2>Adresse</h2>
+            <p>Rue des Ayres <br> 33000 Bordeaux</p>
+        </article>
+        <article>
+            <h2>Horaires</h2>
+            <p>Lundi-Mardi : Fermée</p>
+
+            <h3>Massage</h3>
+            <p>Merdredi-Dimanche : 11h-21h</p> 
+
+            <h3>Salon de thé</h3>
+            <p>Mercredi-Dimanche : 9h-19h</p>   
+        </article>
+        <article>
+            <h2>Social networks</h2>
+            <a href="https://fr-fr.facebook.com" title="lien vers facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://www.instagram.com" title="lien vers instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="pink" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+        </article>
+    </div>
+</section>
+<section>
+    <h2>Une question?N'hesitez pas!</h2>
+
+    <?php include_once 'contactForm.phtml'; ?>
+</section>
+
+<script type="module" src="public/js/submitContact.js"></script>
+
+

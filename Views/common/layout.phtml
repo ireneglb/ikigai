@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ikigai, salon de massage et salon de thé à Bordeaux">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar/main.css" />
+    <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
+    <link rel="stylesheet" href="public/style/index.css"> 
+    <title>Ikigai</title>
+</head>
+<body class="body">
+    <header>
+        <?php include_once('header.phtml');?>
+    </header>
+    <main>
+        <?php include $template;?> 
+
+        <?php if(!empty($_SESSION['message'])):?>
+            <div class="notif">
+                <?=htmlspecialchars($_SESSION['message'], ENT_QUOTES);
+                unset($_SESSION['message']); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if(!empty($_SESSION['error'])):?>
+            <div class="error">
+                <?=htmlspecialchars($_SESSION['error'], ENT_QUOTES);
+                unset($_SESSION['formErrors']); 
+                unset($_SESSION['error']); ?> 
+            </div>   
+        <?php endif; ?>
+    </main>   
+    <footer>
+        <?php include_once('footer.phtml');?>
+    </footer> 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar/locales/fr.js"></script>  
+</body>
+</html>

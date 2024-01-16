@@ -1,0 +1,1251 @@
+// **************************************************************************************************************
+// GENERALITES
+// **************************************************************************************************************
+
+@import '_variables';
+
+body{
+    background: $color-background;
+    font-family: $font-family;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+section{
+    margin-top: 3rem;
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    color : $color-pink;
+    font-size: $font-size-h1;
+    margin: 2rem 0;
+}
+h2{
+    text-align: center;
+    color : $color-pink;
+    font-size: $font-size-h2;
+    margin: 2rem 0;
+}
+h3{
+    text-align: center;
+    margin: 1rem;
+
+}
+a{
+    text-decoration: none;
+}
+
+//Evite de déplacer l'écran vers les cotés en mode mobile
+@media (max-width: 768px) {
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+}
+
+// ********************************************************************************************************
+// HEADER
+// ********************************************************************************************************
+
+.nav-container {
+    position : relative;
+    z-index: 1;
+    text-align: center;
+    overflow: hidden;
+}
+
+.logo-display {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        position: absolute;
+        top: 170px;
+        left: auto;
+        width: 500px;
+        height: 462px;
+        z-index: 1;
+        
+    }
+
+    img:nth-child(1) {
+        animation: slideBottom 2s forwards;
+    }
+    @keyframes slideBottom {    
+        from {        
+            transform: translateY(-100%);    
+        }    
+        to {        
+            transform: translateY(0);    
+        }
+    }
+
+    img:nth-child(2) {
+        animation: slideRight 2s forwards;
+        overflow: hidden;
+    }
+    @keyframes slideRight {    
+        from {        
+            transform: translateX(-100%);    
+        }    
+        to {        
+            transform: translateX(0);    
+        }
+    }
+
+}
+
+.fixed-nav {
+    position: fixed;
+    min-height: 4rem;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    background-color: $color-white;
+    opacity: 0;
+    animation: display 3s forwards;
+    animation-delay: 1s;
+
+    @keyframes display {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+} 
+//Menu Burger
+#menu__toggle {
+    opacity: 0;
+  
+    &:checked {
+      + .menu__btn {
+        > span {
+            transform: rotate(45deg);
+
+            &::before {
+            top: 0;
+            transform: rotate(0deg);
+            }
+
+            &::after {
+            top: 0;
+            transform: rotate(90deg);
+          }
+        }
+      }
+  
+      ~ .menu__box {
+        left: 0;
+      }
+    }
+}
+  
+.menu__btn {
+    position: fixed;
+    top: 31px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 10;
+
+        > span,
+        > span::before,
+        > span::after {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: $color-grey;
+            transition-duration: .25s;
+            top: 12px;
+        }
+
+        > span::before {
+        content: '';
+        top: -8px;
+        }
+
+        > span::after {
+        content: '';
+        top: 8px;
+        }
+}
+  
+.menu__box {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    background-color: $color-background;
+    transition-duration: .25s;
+        li{
+            &:hover {
+                border: 1px solid $color-black;
+            }
+           
+        }
+}
+  
+.menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: $color-pink;
+    text-decoration: none;
+    transition-duration: .25s;
+
+}
+  
+// ********************************************************************************************************
+// MAIN
+// ********************************************************************************************************
+
+//PAGE IN CONSTRUCTION*****************************
+.waiting {
+    background-image: url('../images/waiting.jpg');
+    background-size: cover; 
+    background-position: center; 
+    height : 26rem;
+        h1{
+            color : $color-white;
+        }
+}
+
+//ERRORS AND NOTIFICATIONS*****************************
+.error {
+    width : 70%;
+    border-radius : 20px;
+    text-align: center;
+    background-color: $careful-bis;
+    line-height: 33px;
+    margin: 0px auto 0; 
+}
+.error:before{
+    content: "⚠️";
+    font-size: 20px;
+} 
+.notif{
+    width : 70%;
+    border-radius : 20px;
+    text-align: center;
+    background-color: $validate;
+    line-height: 33px;
+    margin: 4% auto;
+}
+.notif:before{
+    content: "✅";
+    font-size: 20px;
+}
+#errorsRegister {
+    display: none;
+    text-align: center;
+    background-color: $careful; 
+    border-radius : 20px;
+    padding: 5px; 
+    margin: 4% auto;
+    color : $color-white;
+    ul {
+        li {
+            list-style-type: none;
+        }
+    }
+}
+#errorsRegister:before{
+    content: "⚠️";
+    font-size: 20px;
+}
+#errorsLogin{
+    display: none;
+    text-align: center;
+    background-color: $careful;
+    border-radius : 20px;
+    padding: 5px; 
+    margin: 4% auto; 
+    color : $color-white;
+    ul {
+        li {
+            list-style-type: none;
+        }
+    }
+}
+#errorsLogin:before{
+    content: "⚠️";
+    font-size: 20px;
+}
+#errorContact{
+    display: none;
+    text-align: center;
+    background-color: $careful; 
+    border-radius : 20px;
+    padding: 5px; 
+    margin: 4% auto;
+    color : $color-white;
+    ul {
+        li {
+            list-style-type: none;
+        }
+    }
+}
+#errorContact:before{
+    content: "⚠️";
+    font-size: 20px;
+}
+
+//PAGE HOME*****************************
+.home{
+    img{
+        width: 100%;
+        height: 50%;
+        margin: 0.5rem auto;
+        border-radius: 15rem;
+        padding : 1em;
+    }
+    p {
+        margin: 0 0 1rem 0;
+    }
+
+    @media screen and (min-width: 980px) {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row-reverse;
+        margin: 2rem;
+        align-items: center;
+
+        .home-img1 {
+            flex: 2;
+            width: 100%;
+            height: 300px;
+            margin: 0.5rem auto;
+            border-radius: 15rem;
+
+            img {
+                height: 300px;
+                border-radius: 2rem;  
+                object-fit: cover;
+            }
+        }
+
+        .home-text {
+            margin:2rem;
+            flex:3;      
+        }
+    }
+}
+.home2{
+    img{
+        height: 50%;
+        margin: 0.5rem auto;
+        border-radius: 15rem;
+        padding : 1em;
+    }
+    p {
+        margin: 0 0 1rem 0;
+    }
+
+    @media screen and (min-width: 980px) {
+        display: flex;
+        justify-content: center;
+        margin: 2rem;
+        align-items: center;
+
+        .home-img2{
+            flex: 2;
+            width: 100%;
+            height: 100%;
+            margin: 0.5rem auto;
+            border-radius: 15rem;
+            
+            img{
+                height: 714px;
+                border-radius: 20rem;  
+                object-fit: cover; 
+            }
+        }
+        .home-text{
+            margin:2rem;
+            flex:3;
+        }
+    }
+}
+       
+//PAGE MASSAGE*****************************
+.type-massage{
+    height : 50%;
+    overflow: scroll;
+    scroll-behavior: smooth;
+
+    h2{
+        padding: 10px;
+        border-radius: 14px;
+        display: inline-block;
+        background: linear-gradient(to top, $color-pink, $color-white); // Dégradé linéaire du rose au blanc
+        background-clip: border-box;
+        color : $color-white;
+    }  
+}
+.massage-container{
+    .massage {
+    padding: 20px;
+    margin:5rem auto;
+    border: 1px solid $color-pink;
+    box-shadow: $box-shadows;
+    border-radius: 15px;
+    width: 80%;
+    height: 22rem;
+    overflow: scroll;
+    }
+
+    p:first-of-type {
+        text-shadow: 2px 2px 4px $color-black;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    @media screen and (min-width: 980px) {
+        display: flex;
+        justify-content: center;
+
+        .massage {
+            height: auto;
+            overflow: visible;
+            margin : 10px 5px;
+            box-shadow: none;
+            border : 4px solid $color-pink;
+        }
+    }
+}
+
+//PAGE CONTACT*****************************
+#hidden-map{
+    display: none;
+}
+
+// Formulaire de contact
+.form {
+    width: 100%;
+    padding: 5%;
+    background-color: lighten($form-color, 40%);
+
+
+    fieldset {
+        margin-bottom: 4%;
+        border: none;
+    }
+
+    label {
+        color: darken($form-color, 20%);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid darken($form-color, 20%);
+        border-radius: 4px;
+        color: darken($form-color, 50%);
+        &:hover {
+            border-color: darken($form-color, 30%);
+        }
+    }
+    #btnSubmit {
+        width: 100%;
+        padding: 10px;
+        background-color: $form-color;
+        color: $color-white;
+        border: none;
+        border-radius: 4px;
+        &:hover {
+            background-color: darken($form-color, 10%);
+        }
+    }
+}
+
+//FORM REGISTER AND LOGIN*****************************
+.connexion-form {
+    width: 100%;
+    padding:5%;
+    background-color: $color-grey;
+    background-image: url(../images/vert.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    text-align: center;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"]{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid darken($form-color, 20%);
+        border-radius: 4px;
+
+        &:hover {
+            border-color: darken($form-color, 30%);
+        }
+    }
+
+    input[type="password"]{
+        width: 80%;
+        padding: 10px;
+        border: 1px solid darken($form-color, 20%);
+        border-radius: 4px;
+
+        &:hover {
+            border-color: darken($form-color, 30%);
+        }
+    }
+
+}     
+.btnSubmitAuth {
+    width: 100%;
+    padding: 10px;
+    background-color: $form-color;
+    color: $color-white;
+    border: none;
+    border-radius: 4px;
+}
+.btnShowPassword{
+    display: block;
+    padding: 2px;
+    background-color: $validate;
+    border: none;
+    border-radius: 4px;
+    margin:2%;
+}
+.password-verif{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    margin-bottom: 5%;
+
+}
+fieldset {
+    border: none;
+}
+.register-form {
+    width: 100%;
+    padding:5%;
+    background-image: url(../images/jaune.png);
+    background-color: $color-grey;
+    background-repeat: no-repeat;
+    background-position: right;
+    text-align: center;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"]{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid darken($form-color, 20%);
+        border-radius: 4px;
+
+        &:hover {
+            border-color: darken($form-color, 30%);
+        }
+    }
+
+    input[type="password"]{
+        width: 80%;
+        padding: 10px;
+        border: 1px solid darken($form-color, 20%);
+        border-radius: 4px;
+
+        &:hover {
+            border-color: darken($form-color, 30%);
+        }
+    }
+}
+
+//PAGE ADMIN*****************************
+.nav-connect{
+    align-items: center;
+    margin: 0 auto;
+    height: 100%;
+    border-radius: 10px;
+    padding: 1rem;
+    position: relative;
+    ul{
+        li{
+            list-style-type: none;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 20px;
+            background: $color-pink;
+            border : 1px solid $color-white;
+            margin:2rem auto;
+            padding: 0.5rem;   
+            
+            a{
+                color:$color-white;
+            }     
+        }
+    } 
+}  
+.btn-logout{
+    height: 3em;
+    width: 5em;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    text-align: center;
+    border-radius: 3em;
+    transition: 0.5s;
+    background: $careful;
+    color: $color-white;
+    box-shadow: 0 0 10px $color-grey-dark, inset 0 0 10px $color-grey-dark;
+    cursor: pointer;
+}
+.btn-logout:hover {
+    animation: a 0.5s 1 linear;
+}   
+@keyframes a {
+    0% {
+        transform: scale(0.7, 1.3);
+    }
+    
+    25% {
+        transform: scale(1.3, 0.7);
+    }
+    
+    50% {
+        transform: scale(0.7, 1.3);
+    }
+    
+    75% {
+        transform: scale(1.3, 0.7);
+    }
+    
+    100% {
+        transform: scale(1, 1);
+    } 
+}
+//Bouton delete uiverse.io
+.delete{
+    height: 3em;
+    width: 16em;
+    border: none;
+    border-radius: 10em;
+    border-collapse: $careful-bis;
+    background: $careful;
+    font-size: 17px;
+    color: $color-white;
+    font-weight: 500;
+}  
+.delete:hover {
+animation: shake3856 0.3s linear infinite both;
+}
+@keyframes shake3856 {
+0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+}
+
+20% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+}
+
+40% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+}
+
+60% {
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+}
+
+80% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+}
+
+100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+}
+}
+
+//index
+.welcome{
+    text-align: center;
+    border-radius : 20px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
+
+    p{
+        margin: 1rem 0;
+        color : $color-black;
+    }
+}
+
+//page massage
+#massageForm{
+    display: none;
+}
+.card-massage{
+    box-shadow: $shadows-card;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+}  
+
+//affichage massage 
+.list{
+    background-color: $color-grey;
+}
+//page product
+.card {
+    margin: 1.5%; 
+    padding: 1.5%;
+    align-items: center;
+
+    .product-info {
+        text-align: center;
+        border-radius: 10px; 
+    }   
+
+    &:nth-child(odd) {
+        .product-info {
+            background-color: $grey;
+        }
+    }
+    &:nth-child(even) {
+        .product-info {
+            background-color: $color-grey;
+        }
+    }
+}
+.product-name,
+.product-description,
+.product-price {
+    margin: 5px 0;
+    text-align: center;
+}
+.cards-product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card-product {
+    box-shadow: $shadows-card;
+    transition: 0.3s;
+    width: 90%; 
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center; 
+}
+.product-image {
+    width: 100%; 
+    height: 50%;
+    overflow: hidden;
+}
+#productForm{
+    display: none;
+}
+
+
+//PAGE RESERVATION USER*****************************
+#reservationForm {
+    padding: 20px;
+    background-color: $color-background;
+    color: $color-black;
+
+    input[type="text"]{
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: $color-pink;
+      color: $color-white;
+    }
+  
+    label {
+        color: $color-black;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      display: block;
+      margin: 15px auto;
+      border-radius: 16px;
+      background-color:$validate;
+      color: $color-white;
+        cursor: pointer;
+    }
+    .flatpickr-calendar.inline {
+        margin: 0 auto;
+    }
+      .centered-select {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: $color-pink; 
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: $color-pink;
+        color: $color-white;
+    }
+    @media screen and (min-width: 780px) {
+        width: 80%;
+        margin: 0 auto;
+        padding: 3%;
+        border-radius: 36px;
+        box-shadow: $box-shadows;
+    }
+}
+
+#calendar{
+    font-size: 0.8rem;
+    width: 100%;
+    margin: auto; 
+    background-color: $calendar-color;
+    .fc-toolbar-title {
+        font-size: 18px;
+        margin: 0;
+
+    }
+    .fc-toolbar-chunk{
+        display: flex;
+        flex-direction: column;
+    }
+    .fc-button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .fc-button{
+        border-radius: 15px;
+        background-color: $color-black;
+    }
+    a{
+        color: $color-black;
+    }
+    h2{
+        color: $color-black;
+    }
+    @media screen and (min-width: 780px) {
+        width: 70%;
+        height: 50%;
+    }
+}
+
+#prixSection {
+    display: none; 
+    color: $careful; 
+    text-align: center; 
+    border: 3px solid $careful; 
+    box-shadow:$box-shadows;
+    padding: 20px; 
+    margin: 20px auto; 
+    border-radius: 10px; 
+    font-size: 2rem;
+}
+
+#prixSection:not(.hidden) {
+    display: block; 
+}
+
+
+//PAGE ADMIN DISPLAY RESERVATION USER*****************************
+
+.read-massage{
+    width: 90%;
+    text-align: center;
+    overflow: hidden; 
+    margin: auto; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+
+    th, td {
+        padding: 5px;
+        font-size: 0.8em;
+        border-bottom: 20px;
+    }
+
+    th {
+        background-color: $table-color;
+        text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+        background-color: $grey;
+    }
+
+    tr:hover {
+        background-color: $color-pink;
+    }
+
+    .bin{
+    border: none;
+    background-color: transparent;
+    }
+
+}
+
+//PAGE MODIF USER*****************************
+
+#btnDelete {
+    display: block;
+    margin: auto;
+    }
+input[readonly] {
+    cursor: not-allowed;
+}
+
+@media screen and (min-width: 980px) {
+    .my-account{
+        display:flex;
+        justify-content: space-evenly;
+        h2{
+            display: block;
+        }
+
+        .form{
+            width: 25em;
+            height: 24em;  
+        }
+    }
+}
+  
+// ********************************************************************************************************
+// FOOTER
+// ********************************************************************************************************
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    h2 {
+        color : $color-black;
+    }
+    p {
+        color : $color-black;   
+        text-align: center;
+    }
+
+    @media screen and (min-width: 780px) {
+        justify-content: space-evenly;
+        padding: 2%;
+        flex-direction: row;
+        .sub-info {
+            display: flex;
+            margin: 5%;
+        }
+    }
+}
+
+// ********************************************************************************************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// ********************************************************************************************************
+
+@media screen and (min-width: 780px) {
+
+    //NAVBAR*****************************
+   
+    .menu__box {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6%;
+        margin: 0;
+        padding: 10px 0;
+        list-style: none;
+        transition-duration: .25s;
+        background-color: $color-white;
+        li{
+            &:hover {
+                border :none;
+            }
+            a{
+                &:hover{ 
+                    border-bottom: 1px solid $color-black;
+                    font-size: 1.3rem;
+                }
+            }
+           
+        }
+    }
+    .menu__btn {
+        display: none;
+
+    }
+
+    //NAV USER ET ADMIN******************
+    .nav-connect {
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            li{
+                text-align: center;
+                width:35%;
+                margin: 0 1rem;
+                cursor: pointer;
+                    &:hover{
+                        border-color: $color-pink;
+                        background: $color-black;
+    
+                    }
+                a{
+                    &:hover{
+                        color:$color-white;
+                    }
+                }  
+            }
+
+            
+        }
+    }
+    
+    .menu__btn {
+        display: none;
+
+    }
+
+    //PAGE CONTACT*****************************
+    
+    #hidden-map {
+        display: block;
+        .map{
+            height: 25rem;
+            width: 32rem;
+            border-radius: 10%;
+            margin : auto;
+            box-shadow: $box-shadows;
+            display : flex;
+            justify-content: center; 
+        }
+    }  
+    .feather-map-pin {
+        margin: 40px;
+    }
+    //FORM CONTACT*****************************
+
+    .form {
+        width: 57%;
+        margin: 0 auto;
+        padding: 5%;
+        border-radius: 36px;
+        box-shadow: $box-shadows;
+        $color-background: $color-background;
+
+    } 
+
+    //FORM REGISTER AND LOGIN*****************************
+
+    .connexion-form, .register-form{
+        width: 57%;
+        margin: 0 auto;
+        padding: 5%;
+        border-radius: 36px;
+        box-shadow: $box-shadows;
+        $color-background: $color-background;
+    }
+}
+                              
+@media screen and (min-width: 980px) {
+
+    //PAGE CONTACT*****************************
+    
+    .info-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    
+    h1 {
+        grid-column: 1 / -1;
+    }
+    
+    #hidden-map {
+        grid-row: 2;
+        grid-column: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    
+    .info-details {
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    //FORM CONTACT*****************************
+
+    .form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-between;
+        fieldset {
+            margin-bottom: 4%;
+            display:flex;
+            flex-direction: column;
+            border: none;
+        }
+        .msg{
+            width: 100%;
+           
+        }
+        #btnSubmit {
+            cursor: pointer;
+        }
+    }
+
+    //FORM REGISTER AND LOGIN*****************************
+
+    .btnShowPassword, .btnSubmitAuth{
+        cursor: pointer;
+        &:hover {
+            background-color: darken($form-color, 10%);
+        }
+
+    }
+
+    .connexion-form,.register-form {
+        width : 80%;
+
+            fieldset {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+                
+                label {
+                    width: 38%;
+                    text-align: center;
+                    
+                }
+            }                   
+
+    }
+
+    .password-verif {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+
+        input[type="password"] {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+    }
+
+    .register-form{
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+    
+            label {
+                width: 100%;
+                text-align: center;
+                border: none;
+            }
+    
+            input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+    
+            .password-verif {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+    
+                input[type="password"] {
+                    flex-grow: 1;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    //PAGE ADMIN*****************************
+
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+       
+        .card{
+            width: 30%;
+
+        }
+    }
+
+    .card-massage{
+        transition: 0.3s;
+        width: 40%;
+    }
+      
+    .card-massage:hover {
+    box-shadow: $hover-card;
+    }
+
+    .card-product {
+        width: 30%;
+    }
+
+    .card:hover {
+        box-shadow: $hover-card;
+    }
+
+    .product-image {
+        width: 50%; 
+    }
+}
