@@ -1,0 +1,65 @@
+.nav-connect{
+    ul{
+        padding : 0;
+        margin-bottom: 40px;
+        li{
+            list-style-type: none;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 20px;
+            background: $green;
+            width : 80%;
+            margin: 1rem auto;
+            padding: 0.5rem;   
+            box-shadow: $box-shadows;
+            a{
+                color:$white;
+            }     
+        }
+    } 
+}  
+
+.welcome{
+    text-align: center;
+    border-radius : 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top : 5rem;
+    padding-bottom : 2rem;
+
+    p{
+        margin: 1rem 0;
+    }
+}
+
+
+// ***********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// ***********************************
+
+@media screen and (min-width: 780px) {
+    .nav-connect{
+        ul{
+            li{
+                width : 50%;
+
+            }
+        }
+    }
+}
+@media screen and (min-width: 980px) {
+    .nav-connect{
+        ul{
+            display : flex;
+            justify-content: center;
+            li{
+                width: 254px;
+                margin: 6px;
+                &:hover {
+                    background-color: $pink;
+                }
+            }
+
+        }
+    }
+}

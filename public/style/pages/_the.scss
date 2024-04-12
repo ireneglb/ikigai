@@ -1,0 +1,89 @@
+.nav-the{
+    padding-left: 0px;
+    text-align: center;
+    margin-bottom: 5rem;
+    li{
+        padding: 10px;
+        background-color : $green;
+        width: 80%;
+        margin: 0 auto 3px auto;
+        border-radius : 10px;
+            a{
+                color : $white;
+            }
+    }
+}
+
+.imgThe{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+        img{
+            width: 100%; 
+            height: auto; 
+            margin-bottom: 20px;
+        }
+}
+
+
+
+// **********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// **********************************
+
+@media screen and (min-width: 780px) {
+    .nav-the{
+        li{
+            width: 50%;
+        }
+    }
+    .imgThe {
+        img {
+            width: 620px;
+            height: 590px;
+            border-radius: 18px;
+        }
+    }
+}
+
+@media screen and (min-width: 980px){
+    .nav-the{
+        display : grid;
+        grid-template-columns: 1fr 1fr;
+        li{
+            width: 26rem;
+            &:hover{
+                background-color: $pink;
+                cursor: pointer;
+            }
+        }
+    }
+    .the{
+        .menu{
+            display: flex;
+            justify-content: space-evenly;
+            .menu-item{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                h2{
+                    color: $green;
+                }
+                .items{
+                    text-align: center;
+                    p:nth-child(1){
+                        font-weight: bold; 
+                    }
+                    p:nth-child(2){
+                        font-style: italic; 
+                    }
+                }
+            }
+        }
+        .menu-bis{
+            @extend .menu;
+            flex-direction: row-reverse;
+        }
+    }
+
+}

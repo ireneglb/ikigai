@@ -1,5 +1,34 @@
 <?php include_once('Views/admin/index.phtml');?>
 
-<div class="waiting">
-    <h1>Gestion des messages</h1>   
-</div>
+<h1>Gestion des messages</h1>  
+<div class="card-info">
+    <p>Il y a actuellement <?=htmlspecialchars($totalMsg, ENT_QUOTES)  ?> messages.</p>
+</div>   
+
+<?php foreach ($displayMsg as $msg) : ?>
+    <div class="list card">
+        <p>Envoyé le : <?=htmlspecialchars($msg['created_at']); ?></p>
+        <p>Message : <?=htmlspecialchars($msg['message']);?></p>
+        <p>Prenom Nom : <?=htmlspecialchars($msg['firstname'] . ' ' . $msg['lastname'], ENT_QUOTES); ?></p>
+        <p>Numéro : <?=htmlspecialchars($msg['phone'] , ENT_QUOTES); ?></p>
+        <p>Mail : <?=htmlspecialchars($msg['email'] , ENT_QUOTES); ?></p>
+        <form id="deleteForm_<?= $msg['id'] ?>" action="index.php?route=admin_delete_msg" method="POST">
+            <input 
+                type="hidden" 
+                name="csrf_token_delete" 
+                value="<?=htmlspecialchars($_SESSION['csrf_token_delete_msg'], ENT_QUOTES)?>"
+            />
+            <input 
+                name="admin_msg_id" 
+                type="hidden" 
+                value="<?=htmlspecialchars($msg['id'], ENT_QUOTES) ; ?>"
+            />
+            <input 
+                type="submit"
+                class="delete"
+                title="Supprimer le message"
+                value="Supprimer"
+            />
+        </form>
+    </div>
+<?php endforeach; ?>

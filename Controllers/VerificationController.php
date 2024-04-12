@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use Services\SessionManager;
-
 class VerificationController{
 
     public function __construct(){
@@ -21,7 +20,7 @@ class VerificationController{
             $errors[] = "Le champ Nom est vide.";
         } elseif (strlen($lastName) < 2) {                                          
             $errors[] = "Le champ Nom doit contenir au moins 2 caractères.";
-        } elseif (!preg_match('/^[a-zA-Z]+$/', $lastName)) {                        
+        } elseif (!preg_match('/^[a-zA-ZÀ-ÿ]+$/', $lastName)){                      
             $errors[] = "Le champ Nom ne doit contenir que des lettres.";
         } 
 
@@ -29,7 +28,7 @@ class VerificationController{
             $errors[] = "Le champ Prénom est vide.";
         } elseif (strlen($firstName) < 2) {
             $errors[] = "Le champ Prénom doit contenir au moins 2 caractères.";
-        } elseif (!preg_match('/^[a-zA-Z]+$/', $firstName)) {
+        } elseif (!preg_match('/^[a-zA-ZÀ-ÿ]+$/', $firstName)) {
             $errors[] = "Le champ Prénom ne doit contenir que des lettres.";
         } 
 
@@ -109,8 +108,10 @@ class VerificationController{
         $massage_name = trim($_POST['massage_name'] ?? '');
         $massage_type = trim($_POST['massage_type'] ?? '');
         $massage_info = trim($_POST['massage_info'] ?? '');
-        $massage_price = trim($_POST['massage_price'] ?? '');
-    
+        $massage_price30 = trim($_POST['massage_price30'] ?? '');
+        $massage_price60 = trim($_POST['massage_price60'] ?? '');
+        $massage_price90 = trim($_POST['massage_price90'] ?? '');
+
         if (empty($massage_name)) {
             $errors[] = "Le champ nom du massage est vide.";
         } 
@@ -120,9 +121,9 @@ class VerificationController{
         if (empty($massage_info)) {
             $errors[] = "Le champ description du massage est vide.";
         } 
-        if (empty($massage_price)) {
-            $errors[] = "Le champ prix du massage est vide.";
-        } elseif (!preg_match('/^\d+$/', $massage_price)) {
+        if (empty($massage_price30) || empty($massage_price60) || empty($massage_price90)) {
+            $errors[] = "Veuillez remplir tous les prix.";
+        } elseif (!is_numeric($massage_price30) || !is_numeric($massage_price60) || !is_numeric($massage_price90)) {
             $errors[] = "Le champ prix du massage doit contenir uniquement des chiffres.";
         }
     
@@ -130,9 +131,13 @@ class VerificationController{
     }
 
     protected function verifFormProduct(): array{
+        $errors = [];
+        
         $name = trim($_POST['product_name']);
+        $type = trim($_POST['product_type']);
         $description = trim($_POST['product_info']);
         $price = trim($_POST['product_price']);
+        
 
         if (empty($name) ) {
             $errors[] = "Veuillez renseigner le nom du produit.";
@@ -140,24 +145,22 @@ class VerificationController{
             $errors[] = "Le nom du produit doit contenir au moins 3 caractères.";
         }
 
-        if (empty($description) ) {
+        if (empty($type)) {
+                $errors[] = "Veuillez sélectionner une catégorie pour le produit.";
+        }
+
+        if (empty(trim($description))) {
             $errors[] = "Veuillez renseigner la description du produit.";
-        }elseif (strlen($description) < 10) {
+        } elseif (strlen(trim($description)) < 10) {
             $errors[] = "La description du produit doit contenir au moins 10 caractères.";
         }
 
         if (empty($price)) {
             $errors[] = "Veuillez renseigner le prix du produit.";
-        }elseif (!preg_match('/^\d+$/', $price)) {
-            $errors[] = "Le prix du produit doit contenir uniquement des chiffres entier.";
+        } elseif (!preg_match('/^\d+(\.\d+)?$/', $price)) {
+            $errors[] = "Le prix du produit doit être un nombre entier ou décimal.";
         }
 
         return $errors;
     }
-}    
-
-
-
-            
-                            
-                       
+}                         

@@ -54,4 +54,12 @@ protected PDO $db ;
         $query->execute($parameters);
         return $query->rowCount() === 0;
     }
+
+    public function deleteReservation($reservationId){
+        $query = "DELETE FROM reservation WHERE id = :reservationId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
 }

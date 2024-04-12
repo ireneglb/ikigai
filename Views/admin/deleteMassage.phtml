@@ -1,0 +1,19 @@
+<form class="delete-form" action="index.php?route=admin_deleteMassage" method="POST">
+    <input 
+        type="hidden" 
+        name="csrf_token_delete_massage" 
+        value="<?=htmlspecialchars($_SESSION['csrf_token_delete_massage'], ENT_QUOTES)?>"
+    />
+
+    <input 
+        type="hidden" 
+        name="massage_id" 
+        value="<?=htmlspecialchars($massage['id'], ENT_QUOTES)?>"
+    />
+    <input 
+        type="submit"
+        class ="delete"
+        title="Supprimer le massage"
+        value="Supprimer"
+    />
+</form> 

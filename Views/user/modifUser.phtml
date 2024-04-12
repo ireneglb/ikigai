@@ -4,7 +4,7 @@
 <article>
     <h2>Modifier le compte</h2>
 
-    <form id='modifyForm' class="form" action="index.php?route=user_modification" method="POST">
+    <form id='modifyForm' class="form-modify" action="index.php?route=user_modification" method="POST">
         <input type="hidden" name="csrf_token_modif" value="<?=htmlspecialchars($_SESSION['csrf_token_modif'], ENT_QUOTES)?>">
         <input 
             type="hidden" 
@@ -47,12 +47,25 @@
             value="<?= htmlspecialchars($_SESSION['connectedUser']['phone'], ENT_QUOTES) ?>"
             readonly
         />
-
-        <button type="button" id="editButton" class="modify" title="Bouton pour modifier">Modifier</button>
-        <button type="submit" id="submitButton" class="validate" title="Bouton pour valider la modification" disabled>Valider</button> 
+        
+        <button 
+            type="button" 
+            id="editButton" 
+            class="modify-button" 
+            title="Bouton pour modifier">Modifier
+        </button>
+        <button 
+            type="submit" 
+            id="submitButton" 
+            class="validate-button" 
+            title="Bouton pour valider la modification" disabled>Valider
+        </button> 
     </form>
 </article>
-<article>
+<article class="delete-user">
     <?php include_once 'delete.phtml'; ?>
 </article>
 </div>
+
+<script type="module" src="public/js/user.js"></script>
+

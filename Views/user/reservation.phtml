@@ -2,13 +2,14 @@
 
 <h2>Réservation de massage</h2>
 
-<form id="reservationForm" class ="form-reserv" action="index.php?route=submitReservation" method="POST"> 
+<form id="reservationForm" class="card" action="index.php?route=submitReservation" method="POST"> 
     
     <input type="hidden" name="csrf_token_reservation" value="<?= $_SESSION['csrf_token_reservation'] ?>"/>
     
     <fieldset>
-        <label>Disponibilités </label>
+        <label>Disponibilités * </label>
         <div id="calendar"></div>
+        <p>* Les créneaux horaires indisponibles sont affichés en rouge</p>
     </fieldset>
 
     <fieldset>

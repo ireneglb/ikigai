@@ -1,5 +1,4 @@
-<h3>Se connecter</h3>
-<form action="index.php?route=login" id="login_form" method="POST" class="connexion-form" >
+<form action="index.php?route=login" id="login_form" method="POST" class="connexion-form">
     
     <input 
         type="hidden" 
@@ -12,10 +11,10 @@
         type="email" 
         name="user_mail" 
         id="login_email" 
-        placeholder="   @   .com"
         title="Entrez votre email"
-        required
+    
     />
+    <div id="errorMailLog" class="error hidden"></div>
     </fieldset>
     <fieldset>
         <label for="login_password">Mot de passe</label>
@@ -26,7 +25,7 @@
                 id="login_password" 
                 placeholder=" 8 caractères minimum "
                 title="Doit contenir au moins un chiffre, un caractère spécial (&@!?;()), et au moins 8 caractères ou plus"
-                required
+            
             />
             <button 
                 type="button" 
@@ -37,24 +36,20 @@
                 </svg> 
             </button> 
         </div>
+        <div id="errorPasswordLog" class="error hidden"></div>
     </fieldset>
 
-    <div id=errorsLogin></div>
     <button 
         type="submit" 
-        id="btnLogin"
-        class="btnSubmitAuth"
+        class="btnlogin"
         title="Bouton pour se connecter">Se connecter
     </button>
 </form>
 
-<?php 
-if (!empty($_SESSION['formErrors'])): ?>
+<?php if (!empty($_SESSION['formErrors'])): ?>
     <?php foreach ($_SESSION['formErrors'] as $error): ?>
         <div class='error'>
             <?= htmlspecialchars($error); ?>
         </div>
     <?php endforeach; ?>
 <?php endif; ?>
-
-

@@ -12,9 +12,9 @@
     <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
-<button id="showAddMassage">Ajouter un massage</button>
+<button id="showAddMassage" class="btn-green">Ajouter un massage</button>
 
-<form id="massageForm" action="index.php?route=submitMassage" method="POST">
+<form id="massageForm" class="form-massage" action="index.php?route=submitMassage" method="POST">
     <input 
         type="hidden" 
         name="csrf_token_massage" 
@@ -42,36 +42,73 @@
         id="description" 
         name="massage_info" 
         minlength="10"
-        required></textarea><br>
+        required>
+    </textarea><br>
 
-    <label for="price">Prix</label>
+    <label for="price30">Prix pour 30 minutes</label>
     <input 
         type="number" 
-        id="price" 
-        name="massage_price" 
+        id="price30" 
+        name="massage_price30" 
         title="Veuillez entrer uniquement des chiffres." 
         required
     />
 
-    <button type="submit" title="Valider le massage">Valider</button>
+    <label for="price60">Prix pour 1h</label>
+    <input 
+        type="number" 
+        id="price60" 
+        name="massage_price60" 
+        title="Veuillez entrer uniquement des chiffres." 
+        required
+    />
+
+    <label for="price90">Prix pour 1h30</label>
+    <input 
+        type="number" 
+        id="price90" 
+        name="massage_price90" 
+        title="Veuillez entrer uniquement des chiffres." 
+        required
+    />
+
+    <button type="submit" title="Valider le massage" class ="btn-green">Valider</button>
 </form>
 
 <div class="cards">
     <?php foreach($massages as $massage): ?>
-    <div class="card">
-        <div class="product-info">
-            <div class="product-name"><?= htmlspecialchars($massage['name']) ?></div>
-            <div class="product-type"><?= htmlspecialchars($massage['type']) ?></div>
-            <div class="product-description"><?= htmlspecialchars($massage['description']) ?></div>
-            <div class="product-price">Prix (30minutes): <?= htmlspecialchars($massage['price30']) ?></div>
-            <div class="product-price">Prix (60minutes): <?= htmlspecialchars($massage['price60']) ?></div>
-            <div class="product-price">Prix (90minutes): <?= htmlspecialchars($massage['price90']) ?></div>
-            <div class="product-created">Créé le: <?= htmlspecialchars($massage['created_at']) ?></div>
-            <div class="product-modified">Modifié le: <?= htmlspecialchars($massage['modified_at']) ?></div>
+        <div class="card-massage">
+            <div class="massage-info"  data-massage-id="<?=htmlspecialchars ($massage['id']) ?>">
+                <div class="massage">Nom: <?= htmlspecialchars($massage['name']) ?></div>
+                <div class="massage">Type: <?= htmlspecialchars($massage['type']) ?></div>
+                <div class="massage">Description: <?= htmlspecialchars($massage['description']) ?></div>
+                <div class="massage">Prix (30 minutes): <?= htmlspecialchars($massage['price30']) ?>€</div>
+                <div class="massage">Prix (60 minutes): <?= htmlspecialchars($massage['price60']) ?>€</div>
+                <div class="massage">Prix (90 minutes): <?= htmlspecialchars($massage['price90']) ?>€</div>
+            </div>
+            <div class="modify-form" style="display: none;">
+                <form action="index.php?route=admin_updateMassage" method="POST">
+                    <input 
+                        type="hidden" 
+                        name="csrf_token_update_massage"
+                        value="<?= htmlspecialchars($_SESSION['csrf_token_update_massage'], ENT_QUOTES) ?>"
+                    />
+                    <div class="massage">Nom: <input type="text" name="name" value="<?= htmlspecialchars($massage['name']) ?>"></div>
+                    <div class="massage">Type: <input type="text" name="type" value="<?= htmlspecialchars($massage['type']) ?>"></div>
+                    <div class="massage">Description: <textarea name="description"><?= htmlspecialchars($massage['description']) ?></textarea></div>
+                    <div class="massage">Prix (30 minutes): <input type="text" name="price30" value="<?= htmlspecialchars($massage['price30']) ?>">€</div>
+                    <div class="massage">Prix (60 minutes): <input type="text" name="price60" value="<?= htmlspecialchars($massage['price60']) ?>">€</div>
+                    <div class="massage">Prix (90 minutes): <input type="text" name="price90" value="<?= htmlspecialchars($massage['price90']) ?>">€</div>
+                    <input type="hidden" name="id" value="<?= $massage['id'] ?>">
+                    <input type="submit" class= "validate-button" value="Enregistrer" aria-label="Enregistrer les modifications">
+                </form>
+            </div>
+            <button class="modify-button">Modifier</button>
+            <div>
+                <?php include 'deleteMassage.phtml'; ?>
+            </div>
         </div>
-    </div>
     <?php endforeach; ?>
 </div>
-
 <script type="module" src="public/js/adminMassage.js"></script>
 

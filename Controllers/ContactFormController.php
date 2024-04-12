@@ -27,6 +27,15 @@ class ContactFormController extends VerificationController{
                 date_default_timezone_set('Europe/Paris');
 
                 $contact = new Contact();
+                $email = $_POST['user_mail'];
+                $phone = $_POST['user_number'];
+
+                if ($contact->countMessagesByEmailOrPhone($email, $phone) >= 2) {
+                    $_SESSION['formErrors'][] = "Vous avez déjà envoyé plus de deux messages.Merci d'attendre une réponse.";
+                    header("Location: index.php?route=contact");
+                    exit();
+                }
+
                 $contact->insert([
                     'lastname'=> $_POST['user_lastname'],
                     'firstname'=> $_POST['user_firstname'],
@@ -54,6 +63,3 @@ class ContactFormController extends VerificationController{
         }  
     }
 }
-        
-
-

@@ -1,0 +1,46 @@
+//INFO NB MESSAGES/USER & RESERVATION   
+.card-info{
+    box-shadow: $shadows-card;
+    word-wrap: break-word; 
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    background-color: $white;
+    width : 50%;
+    margin: 0 auto;
+    margin-bottom : 32px;
+    @media screen and (min-width: 980px) {
+        transition: 0.3s;
+        width: 40%;
+        margin-bottom : 2rem;
+
+        &:hover {
+            box-shadow: $hover-card;
+        }
+    }
+}  
+
+//UTILISATEUR GESTION
+.list{     
+    @extend .card-massage;                    
+    background-color: $grey;
+    width : 80%;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+
+    @media screen and (min-width: 780px) {
+        width: 50%;
+    }
+    @media screen and (min-width: 980px) {
+        width: 25%
+    }
+}
+
+.form-massage{
+    @extend .form-product;
+
+    @media screen and (min-width: 980px) {
+        width: 32rem;
+        padding: 4rem;
+    }
+}

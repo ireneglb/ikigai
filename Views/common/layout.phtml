@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar/main.css" />
     <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
-    <link rel="stylesheet" href="public/style/index.css"> 
+    <link rel="stylesheet" href="public/style/style.css"> 
     <title>Ikigai</title>
 </head>
 <body class="body">
@@ -15,8 +15,6 @@
         <?php include_once('header.phtml');?>
     </header>
     <main>
-        <?php include $template;?> 
-
         <?php if(!empty($_SESSION['message'])):?>
             <div class="notif">
                 <?=htmlspecialchars($_SESSION['message'], ENT_QUOTES);
@@ -25,12 +23,14 @@
         <?php endif; ?>
         
         <?php if(!empty($_SESSION['error'])):?>
-            <div class="error">
+            <div class="warning">
                 <?=htmlspecialchars($_SESSION['error'], ENT_QUOTES);
                 unset($_SESSION['formErrors']); 
                 unset($_SESSION['error']); ?> 
             </div>   
         <?php endif; ?>
+
+        <?php include $template;?> 
     </main>   
     <footer>
         <?php include_once('footer.phtml');?>

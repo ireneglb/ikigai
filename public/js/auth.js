@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return formVerif.validateRegister();
     });
 
-    document.getElementById("login_form").addEventListener('submit', function(e) {  
+    document.getElementById("login_form").addEventListener('submit', function(e){  
         e.preventDefault();
         return formVerif.validateLogin();
     });

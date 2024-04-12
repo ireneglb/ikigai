@@ -2,180 +2,77 @@
 
 namespace Services;
 
+use Controllers\AdminController;
+use Controllers\AuthController;
 use Controllers\ContactFormController;
-use Controllers\HomeController;
-use Controllers\UserController;
-use Controllers\AdminSessionController;
-use Controllers\UserSessionController;
+use Controllers\MassageController;
+use Controllers\MessageController;
+use Controllers\PageController;
 use Controllers\ReservationController;
+use Controllers\TeaController;
+use Controllers\UserSessionController;
 
+class Routing {
+    // Fonction principale de routage.
+             
+    public function routing(): void {
 
-class Routing{
-    /**
-     * Fonction principale de routage.
-     *
-     * Cette fonction examine la valeur de la clé 'route' dans la variable $_GET
-     * et appelle le contrôleur approprié en fonction de la route spécifiée.
-     */
-    public function routing():void
-    {
-        if(array_key_exists('route',$_GET)):
+        $routes = [
+            // Routes pour les pages publiques (non connecté)
+            'home' => ['controller' => PageController::class, 'method' => 'displayHomePage'],
+            'teahouse' => ['controller' => PageController::class, 'method' => 'displayTeaPage'],
+            'massage' => ['controller' => PageController::class, 'method' => 'displayMassagePage'],
+            'reservation' => ['controller' => PageController::class, 'method' => 'displayHomeReservPage'],
+            'contact' => ['controller' => PageController::class, 'method' => 'displayContactPage'],
+            'submit_message' => ['controller' => ContactFormController::class, 'method' => 'insertMessage'],
 
-            switch  ($_GET['route']){  
-                //Route pour les pages publiques (non connecté)
-                case 'home':
-                    $controller = new HomeController();
-                    $controller->displayHomePage();
-                break;
-            
-                case 'teahouse':
-                    $controller = new HomeController();
-                    $controller->displayTeaPage();
-                break;
-                
-                case 'massage':
-                    $controller = new HomeController();
-                    $controller->displayMassagePage();
-                break;
-                
-                case 'reservation':
-                    $controller = new HomeController();
-                    $controller->displayHomeReservPage();
-                break;
+            // Routes pour la gestion de l'authentification
+            'register' => ['controller' => AuthController::class, 'method' => 'register'],
+            'login' => ['controller' => AuthController::class, 'method' => 'login'],
+            'logout' => ['controller' => AuthController::class, 'method' => 'logout'],
 
-                case 'contact':
-                    $controller = new HomeController();
-                    $controller->displayContactPage();
-                break; 
+            // Routes pour l'espace utilisateur
+            'user_homepage' => ['controller' => UserSessionController::class, 'method' => 'displayUserHomepage'],
+            'user_appointment' => ['controller' => UserSessionController::class, 'method' => 'displayUserAppointment'],
+            'submitDelete' => ['controller' => UserSessionController::class, 'method' => 'deleteUserReservation'],
+            'user_reservation' => ['controller' => UserSessionController::class, 'method' => 'displayUserReservation'],
+            'user_information' => ['controller' => UserSessionController::class, 'method' => 'displayUserInformation'],
+            'user_modification' => ['controller' => UserSessionController::class, 'method' => 'modifUser'],
+            'user_delete' => ['controller' => UserSessionController::class, 'method' => 'deleteUser'],
 
-                case 'submit_message':
-                    $controller = new ContactFormController();
-                    $controller->insertMessage(); 
-                break;   
+            // Routes pour l'espace administrateur
+            'admin_homepage' => ['controller' => AdminController::class, 'method' => 'displayAdminHomepage'],
+            'admin_massage' => ['controller' => MassageController::class, 'method' => 'displayAdminMassage'],
+            'submitMassage' => ['controller' => MassageController::class, 'method' => 'insertMassage'],
+            'admin_tea' => ['controller' => TeaController::class, 'method' => 'displayAdminTea'],
+            'submitProduct' => ['controller' => TeaController::class, 'method' => 'insertNewProduct'],
+            'submitImage' => ['controller' => TeaController::class, 'method' => 'insertImage'],
+            'admin_reservation' => ['controller' => MassageController::class, 'method' => 'displayMassageReservation'],
+            'admin_message' => ['controller' => MessageController::class, 'method' => 'displayClientMessage'],
+            'admin_userManagement' => ['controller' => AdminController::class, 'method' => 'displayUserInformation'],
+            'admin_delete_user' => ['controller' => AdminController::class, 'method' => 'AdminDeleteUser'],
+            'admin_deleteMassage' => ['controller' => MassageController::class, 'method' => 'deleteMassage'],
+            'admin_updateMassage' => ['controller' => MassageController::class, 'method' => 'updateMassage'],
+            'admin_delete_msg' => ['controller' => MessageController::class, 'method' => 'deleteMsg'],
+            'admin_delete_reserv' => ['controller' => AdminController::class, 'method' => 'deleteReservationbyAdmin'],
 
-                //Route pour les pages de connexion et d'inscription
+            // Routes pour les pages de réservation de massage
+            'fetchReservedDates' => ['controller' => ReservationController::class, 'method' => 'fetchReservedDates'],
+            'verifReservation' => ['controller' => ReservationController::class, 'method' => 'checkAvailability'],
+            'submitReservation' => ['controller' => ReservationController::class, 'method' => 'insertReservation'],
+        ];
 
-                case 'register':
-                    $controller = new UserController();
-                    $controller->register();
-                break;
+        // Vérifie si la route demandée existe dans le tableau $routes
+        if (isset($_GET['route']) && array_key_exists($_GET['route'], $routes)) {
+            $route = $routes[$_GET['route']];
+            $controllerName = $route['controller'];
+            $methodName = $route['method'];
 
-                case 'login': 
-                    $controller = new UserController();
-                    $controller->login();
-                break;
-
-                case 'logout':
-                    $controller = new UserController();
-                    $controller->logout();
-                break;
-                
-                //Routes pour les pages de l'espace utilisateur
-
-                case"user_homepage":
-                    $controller = new UserSessionController();
-                    $controller->displayUserHomepage();
-                break;
-
-                case 'user_appointment':
-                    $controller = new UserSessionController();
-                    $controller->displayUserAppointment();
-                break;
-
-                case "submitDelete":
-                    $controller = new UserSessionController();
-                    $controller->deleteUserReservation();
-                break;
-
-                case 'user_reservation':
-                    $controller = new UserSessionController();
-                    $controller->displayUserReservation();
-                break;
-
-                case 'user_information':
-                    $controller = new UserSessionController();
-                    $controller->displayUserInformation();
-                break;
-                
-                case 'user_modification':
-                    $controller = new UserSessionController();
-                    $controller->modifUser(); 
-                break;
-
-                case 'user_delete':
-                    $controller = new UserSessionController();
-                    $controller->deleteUser();
-                break;
-
-                //Routes pour les pages de l'espace administrateur
-
-                case 'admin_homepage':
-                    $controller = new AdminSessionController();
-                    $controller->displayAdminHomepage();
-                break;
-
-                case 'admin_massage':
-                    $controller = new AdminSessionController();
-                    $controller->displayAdminMassage();
-                break;
-
-                case "submitMassage":
-                    $controller = new AdminSessionController();
-                    $controller->insertMassage();
-                break;
-
-                case 'admin_tea':
-                    $controller = new AdminSessionController();
-                    $controller->displayAdminTea();
-                break;
-
-                case 'submitProduct':
-                    $controller = new AdminSessionController();
-                    $controller->insertNewProduct();
-                break;
-
-                case 'admin_reservation':
-                    $controller = new AdminSessionController();
-                    $controller->displayMassageReservation();
-                break;
-
-                case 'admin_message':
-                    $controller = new AdminSessionController();
-                    $controller->displayClientMessage();
-                break;
-
-                case 'admin_userManagement':
-                    $controller = new AdminSessionController();
-                    $controller->displayUserInformation();
-                break;
-                
-                //Routes pour les pages de réservation de massage
-
-                case 'fetchReservedDates':
-                    $controller = new ReservationController();
-                    $controller->fetchReservedDates();
-                break;
-
-                case 'verifReservation':
-                    $controller = new ReservationController();
-                    $controller->checkAvailability();
-                break;
-
-                case "submitReservation":
-                    $controller = new ReservationController();
-                    $controller->insertReservation();
-                break;
-                default:
-                    header('Location: index.php?route=home');
-                    exit;
-                break;
-
-            }
-            else:
-                header ('Location: index.php?route=home');
-                exit;
-        endif;
-    }              
+            $controller = new $controllerName();
+            $controller->$methodName();
+        } else {
+            header('Location: index.php?route=home');
+            exit;
+        }
+    } 
 };
-
-    

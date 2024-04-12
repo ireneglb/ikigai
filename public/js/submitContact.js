@@ -1,6 +1,6 @@
 "use strict";
 
-import VerifContact from './modules/verifContact.js';
+import VerifContact from './modules/formVerifContact.js';
 
 let formVerifContact = new VerifContact(); 
 

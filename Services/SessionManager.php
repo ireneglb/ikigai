@@ -19,7 +19,7 @@ class SessionManager {
         }
     }
     /**
-    *Vérifie si l'utilisateur est un administrateur.
+    * Vérifie si l'utilisateur est un administrateur.
     * @return bool Renvoie true si l'utilisateur est un administrateur et a accès aux pages d'administration, sinon redirige vers la page d'accueil et renvoie false.
     */
     public static function checkAdminSession():bool{
@@ -28,7 +28,16 @@ class SessionManager {
             $_REQUEST['route'] === 'admin_tea' || 
             $_REQUEST['route'] === 'admin_reservation' || 
             $_REQUEST['route'] === 'admin_message' || 
-            $_REQUEST['route'] === 'admin_information'){
+            $_REQUEST['route'] === 'submitMassage' ||
+            $_REQUEST['route'] === 'admin_delete_user' ||
+            $_REQUEST['route'] === 'admin_userManagement' ||
+            $_REQUEST['route'] === 'admin_deleteMassage' ||
+            $_REQUEST['route'] === 'admin_updateMassage' ||
+            $_REQUEST['route'] === 'admin_delete_msg' ||
+            $_REQUEST['route'] === 'admin_delete_reserv' ||
+            $_REQUEST['route'] === 'submitProduct' ||
+            $_REQUEST['route'] === 'submitImage')
+            {
     
             if(empty($_SESSION['connectedUser']) || 
                 (!empty($_SESSION['connectedUser']) && ((int)$_SESSION['connectedUser']['role_id'] !== 1))) {

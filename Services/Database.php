@@ -8,10 +8,10 @@ use Exception;
  * Classe de gestion de la connexion à la base de données.
  */
 class Database {    
-    private static $dbHost = 'localhost' ;              //'db.3wa.io'
-    private static $dbName = 'ikigai' ;                 //'irenegallibour_ikigai'
-    private static $dbUsername = 'root';                //'irenegallibour'
-    private static $dbUserPassword = '';                //'705ab69e1d304937fdc6d7cffa3c8c07'
+    private static $dbHost = 'localhost' ;              
+    private static $dbName = 'ikigai' ;                 
+    private static $dbUsername = 'root';                
+    private static $dbUserPassword = '';                
     private static $db = null;
 
     public function __construct()
@@ -22,7 +22,9 @@ class Database {
     public static function connect(): void 
     {
         try {
-            self::$db = new \PDO("mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword); 
+            // self::$db = new \PDO("mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword)-> rajout de charset
+            self::$db = new \PDO("mysql:host=".self::$dbHost.";"."dbname=".self::$dbName.";charset=utf8", self::$dbUsername, self::$dbUserPassword); 
+            
             
         } catch (\PDOException $error) {
             echo 'échec de la connexion : ' . $error->getMessage();

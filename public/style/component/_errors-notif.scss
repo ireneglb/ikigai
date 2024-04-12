@@ -1,0 +1,39 @@
+//JS
+.error {
+    line-height: 33px;
+    margin: 0px auto 0; 
+    color: $black;
+    font-size : 0.8rem;
+}
+.error:before{
+    content: "⚠️";
+    font-size: 20px;
+} 
+
+//PHP
+.warning{
+    line-height: 33px;
+    margin: 0px auto 0; 
+    color : red;
+    text-align: center;
+    border-bottom: 3px solid red;
+    width: 303px;
+    margin-top: 70px;
+}
+    
+.warning:before{
+    content: "❗";
+    font-size: 20px;
+} 
+
+
+.notif{
+    text-align: center;
+    line-height: 33px;
+    margin: 4% auto;
+    color:$green;
+}
+.notif:before{
+    content: "✅";
+    font-size: 20px;
+}

@@ -20,4 +20,10 @@ protected PDO $db ;
         return $query->execute($parameters);
     }
 
+    public function countMessagesByEmailOrPhone($email, $phone) {
+        $sql = "SELECT COUNT(*) FROM contact WHERE email = :email OR phone = :phone";
+        $query = $this->db->prepare($sql);
+        $query->execute([':email' => $email, ':phone' => $phone]);
+        return $query->fetchColumn();
+    }
 }

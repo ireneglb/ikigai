@@ -3,8 +3,6 @@
 namespace Controllers;
 
 use Models\Reservation;
-
-
 class ReservationController extends VerificationController{
 
     public function fetchReservedDates(): void{
@@ -17,10 +15,10 @@ class ReservationController extends VerificationController{
         $reservation = new Reservation();
         $check = $reservation->check($_POST['datetime_start'], $_POST['duration']);
 
-        $response = ['status' => 'success', 'message' => 'La date est disponible'];
+        $response = ['status' => 'success', 'message' => 'La date ou l\'heure est actuellement disponible.'];
         
         if(!$check) {
-            $response = ['status' => 'error', 'message' => 'La date est déjà réservée'];
+            $response = ['status' => 'error', 'message' => 'La date ou l\'horaire est déjà réservée.'];
         }
         echo json_encode($response);
     }
@@ -41,14 +39,14 @@ class ReservationController extends VerificationController{
                     'massage_id' => $_POST['types_massage'],
                     'datetime_start' => $_POST['select_date'],
                     'duration' => $_POST['duration'],
-                    'offer' =>  !empty($_POST['special_offer']),
+                    'offer' =>  intval(!empty($_POST['special_offer'])),
                     'price' => $_POST['tarif'],
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
               
                 if($data === true) {
                     $_SESSION['message'] = "Votre réservation a bien été prise en compte";
-                    header("location: index.php?route=user_homepage"); 
+                    header("location: index.php?route=user_appointment"); 
                     exit();
                 } 
                 else {

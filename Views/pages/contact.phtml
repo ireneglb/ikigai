@@ -1,0 +1,53 @@
+<section class="info-container">
+    <div class="grid-form">  
+        <?php include_once 'contactForm.phtml'; ?>
+    </div>
+
+    <div class="grid-adress"> 
+        <h2>Adresse</h2>
+        <a href="https://www.openstreetmap.org/node/2485582444">
+            <img src="public/images/map.png" alt="Adresse">
+        </a>
+        <p>Rue des Ayres <br> 33000 Bordeaux</p>    
+            <div id="hidden-map">
+                <iframe
+                    title="carte"
+                    class="map" 
+                    width="425" 
+                    height="350" 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-0.5744916200637818%2C44.83643920045825%2C-0.5706828832626344%2C44.83781243866995&amp;layer=mapnik"> 
+                </iframe>
+            </div>
+    </div>
+
+    <div class="grid-net">
+        <h2>Social networks</h2>
+        <a href="https://fr-fr.facebook.com" title="lien vers facebook">
+            <img src="public/images/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com" title="lien vers instagram">
+            <img src="public/images/instagram.png" alt="Instagram">
+        </a> 
+    </div>
+        
+    <div class="horaire grid-h">
+        <h2 id="horaire">Horaires</h2>
+        <ul>
+            <li>
+                <h3>Fermée:</h3>
+            </li>
+            <li>Lundi et Mardi</li>
+            <li> 
+                <h3>Salon de Massage</h3> 
+            </li>
+            <li>Mercredi à Dimanche : 11h-21h</li>
+            <li>
+                <h3>Salon de thé</h3>
+            </li>
+            <li> Mercredi à Dimanche : 9h-19h</li>
+        </ul>
+    </div>
+       
+</section>
+
+<script type="module" src="public/js/submitContact.js"></script>

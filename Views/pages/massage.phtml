@@ -3,15 +3,16 @@
 
     <?php foreach ($groupedMassages as $type => $massages): ?>
     <article class=type-massage>
-        <h2><?= htmlspecialchars($type) ?></h2>
+        <div class="presentation-masage">
+          <h2><?= htmlspecialchars($type) ?></h2>  
+          <div class="background-img"></div> 
+        </div>
         <div class="massage-container">    
             <?php foreach ($massages as $massage): ?>
                 <div class="massage">
                     <p>Le <?= htmlspecialchars($massage['name']) ?></p>
+                    <p>30 minutes: <?= htmlspecialchars($massage['price30']) ?>€<br> 1h: <?= htmlspecialchars($massage['price60']) ?>€<br> 1h30: <?= htmlspecialchars($massage['price90']) ?>€</p>
                     <p><?= htmlspecialchars($massage['description']) ?></p>
-                    <p>30 minutes: <?= htmlspecialchars($massage['price30']) ?>€</p>
-                    <p>1 heure: <?= htmlspecialchars($massage['price60']) ?>€</p>
-                    <p>1 heure et 30 minutes: <?= htmlspecialchars($massage['price90']) ?>€</p>
                 </div>
             <?php endforeach; ?>
         </div>

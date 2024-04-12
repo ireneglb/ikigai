@@ -178,5 +178,3 @@ class UserSessionController extends VerificationController {
         }   
     }    
 }
-
-

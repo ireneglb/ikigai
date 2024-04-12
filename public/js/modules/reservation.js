@@ -22,7 +22,7 @@ class Reservation {
                 const durationParts = reservation.duration.split(':');
                 const duration = durationParts[0] * 60 * 60 * 1000 + durationParts[1] * 60 * 1000;
                 return {
-                    title: 'Indisponible',
+                    title: 'Réservée',
                     start: datetime_start.toISOString(),
                     end: new Date(datetime_start.getTime() + duration).toISOString()
                 };
@@ -37,7 +37,7 @@ class Reservation {
 
   initCalendar() {
     let calendarEl = document.getElementById('calendar');
-    let calendar = new FullCalendar.Calendar(calendarEl, {
+    let calendar = new FullCalendar.Calendar(calendarEl, { 
       locale: 'fr',
       initialView: 'dayGridDay',
       firstDay: 3,
@@ -67,8 +67,8 @@ class Reservation {
     calendar.render();
   }
 
-  initFlatpickr() {
-    flatpickr("#flatpickr", {
+  initFlatpickr() { 
+    flatpickr("#flatpickr", {  
         enableTime: true,
         inline:true,
         minDate: "today",
@@ -119,7 +119,7 @@ class Reservation {
     if (tarif === "Erreur") {
       document.getElementById('prix').innerText = "Calcul du prix en cours...";
     } else {
-      document.getElementById('prix').innerText = "Prix: " + tarif + " euros";
+      document.getElementById('prix').innerText = "Prix : " + tarif + " €";
     }
     document.getElementById('tarif').value = tarif; 
     document.getElementById('duree_tarif').value = dureeMassage; 

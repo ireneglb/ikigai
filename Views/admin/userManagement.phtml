@@ -1,4 +1,35 @@
 <?php include_once('Views/admin/index.phtml');?>
-<div class="waiting">
-    <h1>Gestion des utilisateur</h1>   
-</div>
+
+<h1>Gestion des utilisateur</h1>   
+
+<div class="card-info">
+    <p>Il y a actuellement <?=htmlspecialchars($totalUser,ENT_QUOTES)  ?> utilisateurs enregistrés.</p>
+</div>   
+
+<?php foreach ($displayUsers as $totalUser) : ?>
+    <div class="list">
+        <p><strong>Client</strong></p>
+        <p>Prenom Nom : <?=htmlspecialchars($totalUser['firstname'] . ' ' . $totalUser['lastname'], ENT_QUOTES); ?></p>
+        <p>Numéro : <?=htmlspecialchars($totalUser['phone'] , ENT_QUOTES); ?></p>
+        <p>Mail : <?=htmlspecialchars($totalUser['email'] , ENT_QUOTES); ?></p>
+        <p>Enregistrement le : <?=htmlspecialchars($totalUser['created_at']); ?></p>
+        <form id="deleteForm_<?= $totalUser['id'] ?>" action="index.php?route=admin_delete_user" method="POST">
+            <input 
+                type="hidden" 
+                name="csrf_token_delete" 
+                value="<?=htmlspecialchars($_SESSION['csrf_token_delete_admin'], ENT_QUOTES)?>"
+            />
+            <input 
+                name="admin_user_id" 
+                type="hidden" 
+                value="<?=htmlspecialchars($totalUser['id'], ENT_QUOTES) ; ?>"
+            />
+            <input 
+                type="submit"
+                class="delete"
+                title="Supprimer l'utilisateur"
+                value="Supprimer"
+            />
+        </form>
+    </div>
+<?php endforeach; ?>

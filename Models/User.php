@@ -72,6 +72,4 @@ class User
         $query = $this->db->prepare($sql);
         return $query->execute(['id'=> $id]);
     }
-        
-
 }

@@ -1,14 +1,14 @@
 <?php include_once('Views/admin/index.phtml');?>
 
-<h2>Affichage des reservations de massage</h2>
-<div class="card-massage">
+<h1>Gestion des massages réservés</h1>
+<div class="card-info">
     <p>Il y a actuellement <?=htmlspecialchars($reservations ,ENT_QUOTES)  ?> massage de réservé.</p>
 </div>    
 <div>
 <?php foreach ($userMassageDetails as $reservationDetails) : ?>
-    <div class="list card-massage">
-        <p>Nom de l'utilisateur : <?=htmlspecialchars($reservationDetails['user_firstname'] . ' ' . $reservationDetails['user_lastname'], ENT_QUOTES); ?></p>
-        <p>Nom du massage : <?=htmlspecialchars($reservationDetails['massage_name'], ENT_QUOTES); ?></p>
+    <div class="list">
+        <p>Utilisateur : <?=htmlspecialchars($reservationDetails['user_firstname'] . ' ' . $reservationDetails['user_lastname'], ENT_QUOTES); ?></p>
+        <p> <?=htmlspecialchars($reservationDetails['massage_name'], ENT_QUOTES); ?></p>
         <p>Type de massage : <?=htmlspecialchars($reservationDetails['massage_type'], ENT_QUOTES); ?></p>
         <?php
             $duration = $reservationDetails['duration'];
@@ -16,9 +16,9 @@
                     (($duration == '01:00:00') ? $reservationDetails['massage_price60'] :
                     (($duration == '01:30:00') ? $reservationDetails['massage_price90'] : 0));
         ?>
-        <p>Prix du massage : <?= htmlspecialchars($price, ENT_QUOTES); ?> €</p>
+        <p> <?= htmlspecialchars($price, ENT_QUOTES); ?> €</p>
         <p>Date et heure de la réservation : <?=htmlspecialchars($reservationDetails['datetime_start'], ENT_QUOTES); ?></p>
-        <p> Durée de la réservation : <?=htmlspecialchars($reservationDetails['duration'], ENT_QUOTES); ?> </p>
+        <p> Durée: <?=htmlspecialchars($reservationDetails['duration'], ENT_QUOTES); ?> </p>
         <p>Offre : 
             <?php if ($reservationDetails['offer'] == 1): ?>
                 Oui
@@ -26,6 +26,25 @@
                 Non
             <?php endif; ?> 
         </p>
+
+        <form id="deleteForm_<?= $reservationDetails['id'] ?>" action="index.php?route=admin_delete_reserv" method="POST">
+            <input 
+                type="hidden" 
+                name="csrf_token_delete_reserv_admin" 
+                value="<?=htmlspecialchars($_SESSION['csrf_token_delete_reserv_admin'], ENT_QUOTES)?>"
+            />
+            <input 
+                name="admin_reserv_id" 
+                type="hidden" 
+                value="<?=htmlspecialchars($reservationDetails['id'], ENT_QUOTES) ; ?>"
+            />
+            <input 
+                type="submit"
+                class="delete"
+                aria-label="Supprimer le massage"
+                value="Supprimer"
+            />
+        </form>
     </div>
 <?php endforeach; ?>
 </div>

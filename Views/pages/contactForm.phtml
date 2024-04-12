@@ -1,3 +1,11 @@
+<?php if (!empty($_SESSION['formErrors'])): ?>
+    <?php foreach ($_SESSION['formErrors'] as $error): ?>
+        <div class='error'>
+            <?= htmlspecialchars($error); ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
 <form id ="contactForm" class="form" action="index.php?route=submit_message" method="POST">
     
     <input 
@@ -5,7 +13,8 @@
         name="csrf_token_formMessage" 
         value="<?= htmlspecialchars($_SESSION['contact_form_csrf_token'],ENT_QUOTES) ?>"
     />
-    <fieldset>
+
+    <div class="formContact">
         <label for="msg_lastname">Nom</label>
         <input 
             type="text" 
@@ -15,7 +24,10 @@
             title="Entrez votre Nom(2 caractères minimum)"
             <?php if(!empty($_SESSION['formErrors']['user_lastname'])): ?>class="error"<?php endif; ?>
         />
+    </div>
+    <div id="errorLastNameContact" class="error hidden"></div>
 
+    <div class="formContact">
         <label for="msg_firstname">Prénom</label>
         <input 
             type="text" 
@@ -24,47 +36,50 @@
             minlength="2" 
             title="Entrez votre Prénom (2 caractères minimum)"
         />
-    </fieldset>
-    <fieldset>
-        <label for="msg_number">Numéro de téléphone</label>
-        <input 
-            type="tel" 
-            id="msg_number" 
-            name="user_number" 
-            title = "Entrez votre numéro de téléphone. 10 à 12 chiffres."
-        />
+    </div>
+    <div id="errorFirstNameContact" class="error hidden"></div>
 
+    <div class="formContact">
+    <label for="msg_number">Numéro de téléphone</label>
+    <input 
+        type="tel" 
+        id="msg_number" 
+        name="user_number" 
+        title = "Entrez votre numéro de téléphone. 10 à 12 chiffres."
+    />
+    </div>
+    <div id="errorNumberContact" class="error hidden"></div>
+    
+    <div class="formContact">
         <label for="msg_email">Email</label>
         <input 
             type="email" 
             id="msg_email" 
             name="user_mail" 
             title="Entrez votre email"
-            placeholder="   @   .com"
         />
-    </fieldset>
-    <fieldset class="msg">
+    </div>
+    <div id="errorMailContact" class="error hidden"></div>
+
+    <div class="formContact">
         <label for="msg">Message</label>
         <textarea 
             id="msg" 
             name="user_text" 
             title = "Entrez votre message"
-            placeholder="Tapez votre message..." 
+            placeholder="Une question? N'hesitez pas..." 
         ></textarea>
-    </fieldset>
+    </div>
+    <div id="errorMsgContact" class="error hidden"></div>
 
-    <div id="errorContact"></div>
-    <button type="submit" id="btnSubmit"title="Bouton pour valider l'incription">Envoyer</button>
+    <button 
+        type="submit" 
+        id="btnSubmit"
+        class="btn"
+        title="Bouton pour valider l'incription">Envoyer
+    </button>
 </form>
 
-<?php 
-if (!empty($_SESSION['formErrors'])): ?>
-    <?php foreach ($_SESSION['formErrors'] as $error): ?>
-        <div class='error'>
-            <?= htmlspecialchars($error); ?>
-        </div>
-    <?php endforeach; ?>
-<?php endif; ?>
 
 
 

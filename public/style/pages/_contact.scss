@@ -1,0 +1,128 @@
+.info-container{
+    background-color: $white;
+}
+
+#hidden-map{
+    display: none;
+}
+
+
+.horaire{
+    ul{
+        padding : 0 0 2em 0;
+
+        li {
+            list-style-type: none;
+        }
+        h4 {
+            display: inline;
+        }
+    }
+}
+
+// Formulaire 
+.form {
+    text-align: left;
+    width : 90%;
+    margin : 0 auto;
+    margin-top : 5rem;
+
+    .formContact{
+        display: flex;
+        flex-direction: column;
+        margin-top : 1rem;
+    }
+
+    label {
+        color: darken($pink, 20%);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],textarea {
+        @include form-rules;
+    }
+    
+}
+
+// **********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// **********************************
+
+@media screen and (min-width: 780px) {
+ 
+    #hidden-map {
+        display: block;
+        .map{
+            height: 25rem;
+            width: 32rem;
+            border-radius: 10%;
+            margin : auto;
+            box-shadow: $box-shadows;
+            display : flex;
+            justify-content: center; 
+        }
+    }  
+    .feather-map-pin {
+        margin: 40px;
+    }
+
+    //FORM CONTACT
+
+    .form {
+        width: 57%;
+        margin: 0 auto; 
+        margin-bottom: 40px;
+        margin-top: 6rem;
+        padding: 5%;
+        border-radius: 36px;
+        box-shadow: $box-shadows;
+        $color-background: $color-background;
+       
+    } 
+}
+
+@media screen and (min-width: 980px) {
+
+    //PAGE CONTACT
+
+    .info-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        grid-gap: 10px;    
+
+            .form{
+                width : 460px;
+                padding: 48px;
+            }
+        
+            .grid-form {
+            grid-column: 1 / 2; 
+            grid-row: 1; 
+            }
+        
+            .grid-adress {
+                grid-column: 2 / 3; 
+                grid-row: 1; 
+                margin-top: 1rem;
+            }
+            
+            .grid-net {
+                grid-column: 1/ 2; 
+                grid-row: 2; 
+            }
+            
+            .grid-h {
+                grid-column: 2/ 3; 
+                grid-row: 2; 
+            }
+    }
+    
+    //FORM CONTACT
+
+    .form {
+        #btnSubmit {
+            cursor: pointer;
+        }
+    }
+}

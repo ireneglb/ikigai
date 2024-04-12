@@ -1,0 +1,59 @@
+.card-massage {
+    margin : 2rem;
+    padding: 2%;
+    align-items: center;
+    border-radius: 10px; 
+    text-align: center;
+    box-shadow: $box-shadows;
+
+    &:nth-child(odd) {
+        background-color: $grey; 
+    }
+
+    &:nth-child(even) {
+        background-color: $light-grey; 
+    }
+
+    @media screen and (min-width: 980px) {
+        &:hover {
+            box-shadow: $hover-card;
+        }
+    }
+}
+
+.massage {
+    text-align: center;
+    margin: 6px 0;
+} 
+
+#massageForm{
+    display: none;
+}
+
+// **********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// **********************************
+
+@media screen and (min-width: 780px) {
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .card-massage{
+            flex-basis: calc(42% - 20px);
+            margin: 2%;
+        }
+
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+       
+        .card-massage{
+            width: 30%;
+        }
+    }
+}

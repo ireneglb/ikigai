@@ -1,0 +1,92 @@
+//PAGE MODIF USER
+.form-modify{
+    @extend .form;
+    margin-top : 0;
+    label{
+        color:$white;
+    }
+    .modify-button{
+        margin-top: 20px;
+    }
+}
+
+input[readonly] {
+    cursor: not-allowed;
+}
+.delete-user{
+    text-align: center;
+}
+
+
+//PAGE DISPLAY APPOINTMENT
+.read-massage{
+    text-align: center;
+    overflow: hidden; 
+    margin: auto auto 40px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-spacing: 0;
+
+    th:first-child {
+        border-top-left-radius: 10px; 
+    }
+    th:last-child {
+        border-top-right-radius: 10px; 
+    }
+
+    th {
+        padding: 4px;
+        font-size: 0.8em;
+        background-color: $black;
+        color: $white;
+    
+    }
+    td{
+        padding: 4px;
+        font-size: 0.8em;
+        background-color: $light-grey; 
+        color : $black;
+
+    }
+
+    .bin{
+    border: none;
+    background-color: transparent;
+    }
+
+}
+
+// **********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// **********************************
+
+@media screen and (min-width: 980px) {
+    .main-reservation{
+        display : flex;
+        justify-content: space-evenly;
+        .auth{            
+            display : flex;
+            flex-direction: column;
+            width : 45%;
+        }
+    }
+
+    .my-account{
+        display:flex;
+        justify-content: space-evenly;
+        h2{
+            display: block;
+        }
+
+        .form{
+            width: 25em;
+            height: 24em;  
+        }
+    }
+    .bin{
+        cursor : pointer;
+    }
+}

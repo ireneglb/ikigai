@@ -2,92 +2,100 @@
 
 class FormVerification{
 
-    validateRegister(){ 
-        const FormValid = this.verifyFormRegister();
-       
-        if(FormValid.length === 0){
+    validateRegister() { 
+        const errors = this.verifyFormRegister();
+
+        document.querySelectorAll('.error').forEach(element => {
+            element.textContent = ''; 
+            element.classList.add('hidden'); 
+        });
+    
+
+        errors.forEach(error => {
+            const inputId = error.inputId;
+            const errorMessage = error.message;
+            const errorDiv = document.getElementById('error' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
+            errorDiv.textContent = errorMessage;
+            errorDiv.classList.remove('hidden'); 
+        });
+    
+        const hasErrors = errors.length > 0;
+        if (!hasErrors) {
             document.getElementById('register_form').submit();
-        }else {
-            let errorsRegister = FormValid;
-            let ul = document.createElement('ul');
-            errorsRegister.forEach(errorRegister => {
-                let li = document.createElement('li');
-                li.innerHTML = errorRegister;
-                ul.appendChild(li);
-            });
-            document.getElementById('errorsRegister').innerHTML = '';
-            document.getElementById('errorsRegister').appendChild(ul);  
-            document.getElementById('errorsRegister').style.display = 'block';
         }
-    } 
+    }
 
     verifyFormRegister() {
         const errors = [];
-
+    
         const lastName = document.getElementById('register_lastname').value.trim();
         if (lastName === '') {
-            errors.push("Le champ Nom est vide."); 
+            errors.push({ inputId: 'LastName', message: "Veuillez saisir votre nom." }); 
         } else if (lastName.length < 3) {
-            errors.push("Le champ Nom doit contenir au moins 3 caractères.");
+            errors.push({ inputId: 'LastName', message: "Votre nom doit comporter au moins 3 caractères" });
         } else if (!/^[a-zA-Z]+$/.test(lastName)) {
-            errors.push("Le champ Nom ne doit contenir que des lettres.");
+            errors.push({ inputId: 'LastName', message: "Votre nom ne doit contenir que des lettres." });
         }
-
+    
         const firstName = document.getElementById('register_firstname').value.trim();
         if (firstName === '') {
-            errors.push("Le champ Prénom est vide.");
+            errors.push({ inputId: 'FirstName', message: "Veuillez saisir votre prénom." });
         } else if (firstName.length < 3) {
-            errors.push("Le champ Prénom doit contenir au moins 3 caractères.");
+            errors.push({ inputId: 'FirstName', message: "Votre prénom doit comporter au moins 3 caractères." });
         } else if (!/^[a-zA-Z]+$/.test(firstName)) {
-            errors.push("Le champ Prénom ne doit contenir que des lettres.");
+            errors.push({ inputId: 'FirstName', message: "Votre prénm ne doit contenir que des lettres." });
         }
-
+    
         const number = document.getElementById('register_number').value.trim();
         if (number === '') {
-            errors.push("Le champ Numéro de téléphone est vide.");
+            errors.push({ inputId: 'Number', message: "Veuillez saisir votre numéro de téléphone." });
         } else if (number.length < 10 || number.length > 12) {
-            errors.push("Le champ Numéro doit contenir entre 10 et 12 chiffres.");
+            errors.push({ inputId: 'Number', message: "Votre numéro de téléphone doit comporter entre 10 et 12 chiffres." });
         } else if (!/^\d+$/.test(number)) {
-            errors.push("Le champ Numéro ne doit contenir que des chiffres.");
+            errors.push({ inputId: 'Number', message: "Votre Numéro ne doit contenir que des chiffres." });
         }  
-                                   
+    
         const password = document.getElementById('register_password').value.trim();
         if (password === '') {
-            errors.push("Le champ mot de passe est vide.");
+            errors.push({ inputId: 'Password', message: "Veuillez entrer un mot de passe." });
         } else if (password.length < 8) {
-            errors.push("Le champ mot de passe doit contenir au moins 8 caractères.");
+            errors.push({ inputId: 'Password', message: "Le mot de passe doit contenir au moins 8 caractères." });
         } else if (!/\d/.test(password)) {
-            errors.push("Le champ mot de passe doit contenir au moins un chiffre.");
+            errors.push({ inputId: 'Password', message: "Le mot de passe doit contenir au moins un chiffre." });
         } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@!?;()&]).{8,}$/.test(password)) {
-            errors.push("Le champ mot de passe doit contenir au moins une majuscule et un des caractères spéciaux suivants : &@!?;()");
+            errors.push({ inputId: 'Password', message: "Le mot de passe doit contenir au moins une majuscule et un des caractères spéciaux suivants : &@!?;()" });
         }
-
+    
         const email = document.getElementById('register_mail').value.trim();
         if (email === '') {
-            errors.push("Le champ Email est vide.");
+            errors.push({ inputId: 'Mail', message: "Veuillez saisir une adresse e-mail." });
         }
-
+    
         return errors;
     }
 
-    validateLogin(){
-        const PasswordAndMailValid= this.verifyLogin();
 
-        if(PasswordAndMailValid.length ===0){
-           return true;
-        }else {
-            let errorLogin = PasswordAndMailValid;
-            let ul = document.createElement('ul');
-            errorLogin.forEach(errorLogin => {
-                let li = document.createElement('li');
-                li.innerHTML = errorLogin;
-                ul.appendChild(li);
-            });
-            document.getElementById('errorsLogin').innerHTML = '';
-            document.getElementById('errorsLogin').appendChild(ul); 
-            document.getElementById('errorsLogin').style.display = 'block'; 
-            return false;
-        }   
+    validateLogin() { 
+        const errors= this.verifyLogin();
+    
+        document.querySelectorAll('.error').forEach(element => {
+            element.textContent = ''; 
+            element.classList.add('hidden');
+        });
+    
+        errors.forEach(error => {
+            const inputId = error.inputId;
+            const errorMessage = error.message;
+            const errorDiv = document.getElementById('error' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
+            errorDiv.textContent = errorMessage;
+            errorDiv.classList.remove('hidden'); 
+        });
+
+        const hasErrors = errors.length > 0;
+        if (!hasErrors) {
+
+            document.getElementById('login_form').submit();
+        }
     }
 
     verifyLogin() {
@@ -95,24 +103,23 @@ class FormVerification{
                                             
         const password = document.getElementById('login_password').value.trim();
         if (password === '') {
-            errors.push("Le champ mot de passe est vide.");
+            errors.push({ inputId: 'PasswordLog', message: "Veuillez entrer votre mot de passe."});
         } else if (password.length < 8) {
-            errors.push("Le champ mot de passe doit contenir au moins 8 caractères.");
+            errors.push({ inputId: 'PasswordLog', message: "Le mot de passe doit contenir au moins 8 caractères."});
         } else if (!/\d/.test(password)) {
-            errors.push("Le champ mot de passe doit contenir au moins un chiffre.");
+            errors.push({ inputId: 'PasswordLog', message: "Le mot de passe doit contenir au moins un chiffre."});
         } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@!?;()&]).{8,}$/.test(password)) {
-            errors.push("Le champ mot de passe doit contenir au moins une majuscule et un des caractères spéciaux suivants : &@!?;()");
+            errors.push({ inputId: 'PasswordLog', message:"Le mot de passe doit contenir au moins une majuscule et un des caractères spéciaux suivants  &@!?;()"});
         }
 
         const email = document.getElementById('login_email').value.trim();
         if (email === '') {
-            errors.push("Le champ Email est vide.");
+            errors.push({ inputId: 'MailLog', message: "Le champ Email est vide."});
         }
 
         return errors;
     }
 
-   
 
     showPasswordRegisterTemporarily() {
         let passwordInput = document.getElementById('register_password');

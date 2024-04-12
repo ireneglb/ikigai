@@ -1,0 +1,102 @@
+.type-massage{
+    height : 50%;
+
+    .presentation-masage{
+        position: relative;
+        width : 100%;
+            h2{
+                position: absolute;
+                text-decoration: none;
+                top : 72%;
+                left : 50%;
+                transform: translate(-50%, -50%);
+                color : $white;
+                font-size: xx-large;
+            }
+
+    }
+    .background-img{
+        background-image: url('../images/drainantPetit.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top : 14rem;
+        
+    }
+}
+.massage-container{
+    .massage {
+        background-color: $white;
+        padding: 20px;
+        margin:5rem auto;
+        box-shadow: $box-shadows;
+        border-radius: 15px;
+        width : 80%;
+    }
+
+    p{
+        color : $black;
+    }
+    p:first-of-type {
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    p:nth-child(2){
+        text-align: left;
+        font-style: italic; 
+        font-size : 0.9rem;
+    }
+
+    p:nth-of-type(n+3):nth-of-type(-n+5) {
+        font-size : 0.9rem;
+        text-align : left;
+    }  
+}
+
+// ***********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// ***********************************
+
+@media screen and (min-width: 780px) {
+.type-massage{
+    .presentation-masage{
+        h2{
+            top: 82%;
+        }
+    }
+    .background-img{
+        background-image: url('../images/drainant.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top : 28rem;
+    }
+}
+}
+
+
+@media screen and (min-width: 980px) {
+    section{
+        h1{
+            text-align: center;
+        }
+    }
+    .massage-container{
+        display: flex;
+        justify-content: center;
+    
+        .massage {
+            height: auto;
+            overflow: visible;
+            margin : 10px 5px;
+            width: 50%;
+        }
+    }
+    .type-massage{
+        .background-img{
+            background-size: initial;
+            background-position: center;
+        }
+    }
+}

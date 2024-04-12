@@ -1,0 +1,162 @@
+#reservationForm {
+    padding: 20px;
+    background-color: $color-background;
+    color: $black;
+
+    fieldset, legend {
+        border: none; 
+    }
+
+    fieldset:first-of-type {
+        border-radius: 10px;
+        background-color: $white; 
+        p{
+            font-size : 0.8em;
+        }
+    }
+      
+    input[type="text"]{
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: $pink;
+      color: $white;
+    }
+  
+    label {
+        color: $white;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    label:first-of-type {
+        border-radius: 10px;
+        background-color: $green;
+    }
+
+    label[for="duree_massage"], label[for="offre_speciale"] {
+        color: $black;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      display: block;
+      margin: 15px auto;
+      border-radius: 16px;
+      background-color:$green;
+      color: $white;
+        cursor: pointer;
+    }
+      
+    .centered-select {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: $pink; 
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: $pink;
+        color: $white;
+    }    
+    .flatpickr-calendar.inline {
+        margin: 0 auto;
+    }
+
+}
+
+#calendar{
+    font-size: 0.8rem;
+    width: 100%;
+    margin: auto; 
+    background-color: $white;
+
+    .fc {
+        &-daygrid-day.fc-day-today {
+          background-color:$green;
+        }
+    }
+
+    .fc-event-title{
+        font-weight: inherit;
+    }
+    .fc-button-primary:disabled{
+        background-color: $green;
+    }
+    .fc table{
+        border-collapse: inherit;
+    }
+
+    .fc-toolbar-title {
+        font-size: 18px;
+        margin: 0;
+
+    }
+    .fc-daygrid-event-dot{
+        border : none;
+    }
+    .fc-toolbar-chunk{
+        display: flex;
+        flex-direction: column;
+    }
+    .fc-button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .fc-button{
+        border-radius: 15px;
+        background-color: $black;
+    }
+    a{
+        color: $black;
+    }
+    h2{
+        color: $pink;
+    }
+}
+
+#prixSection {
+    display: none; 
+    text-align: center; 
+    box-shadow: 1px 1px 26px 17px rgba(0,0,0,0.55);
+    padding: 20px; 
+    margin: 20px auto; 
+    border-radius: 10px; 
+    font-size: 1.5rem;
+}
+
+#prixSection:not(.hidden) {
+    display: block; 
+}
+
+// ***********************************
+// MEDIA QUERIES TABLETTE ET DESKTOP
+// ***********************************
+
+@media screen and (min-width: 780px) {
+    #reservationForm {
+        width: 80%;
+        margin: 0 auto;
+        padding: 3%;
+        border-radius: 36px;
+        box-shadow: $box-shadows;
+    }
+    #calendar{
+        width: 70%;
+        height: 50%;  
+    }
+}
+
+@media screen and (min-width: 980px) {
+    #reservationForm {
+        width: 50rem;
+        padding: 2%;
+    }
+}

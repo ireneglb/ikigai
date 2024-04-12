@@ -1,0 +1,172 @@
+<h1>Salon de thé</h1>   
+<ul class="nav-the">
+    <li>
+        <a title="lien vers Cafe" href="#cafe">Cafés</a>
+    </li>
+    <li>
+        <a title="lien vers Thés & Infusions" href="#thes">Thés & Infusions</a>
+    </li>
+    <li>
+        <a title="lien vers Chocolats Chauds" href="#chocolats">Chocolats Chauds</a>
+    </li>
+    <li>
+        <a title="lien vers Rafraichissements" href="#rafraichissements">Rafraichissements</a>
+    </li>
+    <li>
+        <a title="lien vers Gourmandises salées" href="#salees">Gourmandises salées</a>
+    </li>
+    <li>
+        <a title="lien vers Délices de Damas" href="#damas">Délices de Damas</a> 
+    </li>
+    <li>
+        <a title="lien vers Douceurs Sucrées" href="#sucrees">Douceurs Sucrées</a>
+    </li>
+</ul>
+<div class="the">
+    <div class="menu">
+        <?php if ($imageCafes): ?>
+            <div class="imgThe">
+                <img src="<?= $imageCafes['file_path']?>" alt="Image de la catégorie Café">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item">
+            <h2 id="cafe">Cafés</h2>
+            <?php foreach ($productsByType[7] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="menu-bis">
+        <?php if ($imageThes): ?>
+            <div class="imgThe">
+                <img src="<?=htmlspecialchars($imageThes['file_path'])?>" alt="Image de la catégorie Thés & Infusions">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item">
+            <h2 id="thes">Thés & Infusions</h2>
+            <?php foreach ($productsByType[8] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="menu">
+        <?php if ($imageChocolat): ?>
+            <div class="imgThe">
+                <img src="<?=htmlspecialchars($imageChocolat['file_path'])?>" alt="Image de la catégorie Chocolats Chauds">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item">
+            <h2 id="chocolats">Chocolats Chauds</h2>
+            <?php foreach ($productsByType[9] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="menu-bis">
+        <?php if ($imageRaffraichis): ?>
+            <div class="imgThe">
+                <img src="<?= htmlspecialchars($imageRaffraichis['file_path'])?>" alt="Image de la catégorie Rafraichissements">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item">
+            <h2 id="rafraichissements">Rafraichissements</h2>
+            <?php foreach ($productsByType[10] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="menu">
+        <?php if ($imageSales): ?>
+            <div class="imgThe">
+                <img src="<?= htmlspecialchars($imageSales['file_path'])?>" alt="Image de la catégorie Gourmandises salées">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item"> 
+            <h2 id="salees">Gourmandises salées</h2>
+            <?php foreach ($productsByType[11] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+  
+    <div class="menu-bis">
+        <?php if ($imageDamas): ?>
+            <div class="imgThe">
+                <img src="<?= htmlspecialchars($imageDamas['file_path'])?>" alt="Image de la catégorie Délices de Damas">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item">
+            <h2 id="damas">Délices de Damas</h2>
+            <?php foreach ($productsByType[12] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="menu">
+        <?php if ($imageSucres): ?>
+            <div class="imgThe">
+                <img src="<?= htmlspecialchars($imageSucres['file_path'])?>" alt="Image de la catégorie Douceurs Sucrées">
+            </div>
+        <?php else: ?>
+            <p>Aucune image disponible pour cette catégorie.</p>
+        <?php endif; ?>
+
+        <div class="menu-item"> 
+            <h2 id="sucrees">Douceurs Sucrées</h2>
+            <?php foreach ($productsByType[13] as $product): ?>
+                <div class="items">
+                    <p><?= htmlspecialchars($product['name']) ?></p>
+                    <p><?= htmlspecialchars($product['description']) ?></p> 
+                    <p><?= htmlspecialchars($product['price']) ?>€</p>
+                </div> 
+        <?php endforeach; ?>
+        </div>
+    </div>
+</div>

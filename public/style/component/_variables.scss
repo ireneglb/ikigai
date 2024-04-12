@@ -1,0 +1,32 @@
+//Principale
+$black : #000000;
+$white: #ffffff;
+$pink: #cc6c8f;//#a71d62 (noté AAA au couleur);
+$green : #204620;
+$grey: #dbd5d5;
+$dark-grey: #363636;
+$light-grey: #e9e9e9;
+
+
+$box-shadows :  14px -9px 17px 1px rgba(0,0,0,0.61); 
+$shadows-card: 0 4px 8px 0 rgba(0,0,0,0.2);
+$hover-card: 0 8px 16px 0 rgba(0,0,0,0.2);
+$form-shadows: 10px 14px 8px 0px rgba(0,0,0,0.56);
+
+$color-background:linear-gradient(180deg, rgba(255,255,255,1) 10%, #204620 50%, rgba(255,255,255,1) 90%);
+
+//Bouton
+$careful : #b93131; // PHP
+$warning:#3155b9; //JS
+
+//Police
+@font-face {
+    font-family: 'Luciole-Regular'; 
+    src: url('../font/Luciole-Regular.ttf') format('truetype'),
+         url('../font/Luciole-Regular.woff') format('woff'),
+         url('../font/Luciole-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+$font-family: 'Luciole-Regular', sans-serif; 
+$font-size: 1rem;
